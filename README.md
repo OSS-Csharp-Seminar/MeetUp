@@ -11,13 +11,11 @@
   * Activities are categorized by tags (sport, event, culture, etc...).
   * Other users can subscribe to join.
   * Owner approves subscribers before they can see further information about the activity.
-  
-* Grouping images to albums
-  * Users can group their and others images into albums for eaiser viewing
-  * Default album "Favorites" where they can add images exists for every user at the start
 
 * Ranking Users
   * Leave reviews for users that you met with
+  * Leave reviews for activity organizer
+  * Users get an email reminder to rate the activity owner containing a token for automatic authorization
   
 * Filter
   * Filter by tag
