@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MeetUp.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<MeetUpContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MeetUpContext") ?? throw new InvalidOperationException("Connection string 'MeetUpContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
