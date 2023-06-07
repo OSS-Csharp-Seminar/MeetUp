@@ -1,43 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MeetUp.Interfaces;
+using MeetUp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MeetUp.Data;
-using MeetUp.Models;
 
 namespace MeetUp.Controllers
 {
     public class MeetActivitiesController : Controller
     {
-        private readonly MeetUpContext _context;
+        private readonly IMeetActivityService service;
+        private readonly ICategoryService categoryService;
+        private readonly ILocationService locationService;
 
-        public MeetActivitiesController(MeetUpContext context)
+        public MeetActivitiesController(IMeetActivityService _service, ICategoryService _categoryService, ILocationService _locationService)
         {
-            _context = context;
+            service = _service;
+            categoryService = _categoryService;
+            locationService = _locationService;
         }
 
         // GET: MeetActivities
         public async Task<IActionResult> Index()
         {
-            var meetUpContext = _context.MeetActivity.Include(m => m.Category).Include(m => m.Location);
-            return View(await meetUpContext.ToListAsync());
+
+            return View(service.GetAll().Result);
         }
 
         // GET: MeetActivities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.MeetActivity == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var meetActivity = await _context.MeetActivity
-                .Include(m => m.Category)
-                .Include(m => m.Location)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var meetActivity = service.GetById(id.Value).Result;
             if (meetActivity == null)
             {
                 return NotFound();
@@ -46,47 +42,42 @@ namespace MeetUp.Controllers
             return View(meetActivity);
         }
 
-        // GET: MeetActivities/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id");
-            ViewData["LocationId"] = new SelectList(_context.Location, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");
+            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id");
             return View();
         }
 
-        // POST: MeetActivities/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Time,Capacity,Picture,LocationId,CategoryId")] MeetActivity meetActivity)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(meetActivity);
-                await _context.SaveChangesAsync();
+                service.Add(meetActivity);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Category"] = new SelectList(_context.Category, "Name", "Name", meetActivity.CategoryId);
-            ViewData["Location"] = new SelectList(_context.Location, "Name", "Name", meetActivity.LocationId);
+            ViewData["Category"] = new SelectList(categoryService.GetAll().Result, "Name", "Name", meetActivity.CategoryId);
+            ViewData["Location"] = new SelectList(locationService.GetAll().Result, "Name", "Name", meetActivity.LocationId);
             return View(meetActivity);
         }
 
         // GET: MeetActivities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.MeetActivity == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var meetActivity = await _context.MeetActivity.FindAsync(id);
+            var meetActivity = service.GetById(id.Value).Result;
             if (meetActivity == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", meetActivity.CategoryId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "Id", "Id", meetActivity.LocationId);
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id", meetActivity.CategoryId);
+            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id", meetActivity.LocationId);
             return View(meetActivity);
         }
 
@@ -103,42 +94,25 @@ namespace MeetUp.Controllers
             }
 
             if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(meetActivity);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MeetActivityExists(meetActivity.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+            { 
+                service.Update(meetActivity);
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "Id", "Id", meetActivity.CategoryId);
-            ViewData["LocationId"] = new SelectList(_context.Location, "Id", "Id", meetActivity.LocationId);
+
+
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id", meetActivity.CategoryId);
+            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id", meetActivity.LocationId);
             return View(meetActivity);
         }
 
         // GET: MeetActivities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.MeetActivity == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var meetActivity = await _context.MeetActivity
-                .Include(m => m.Category)
-                .Include(m => m.Location)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var meetActivity = service.GetById(id.Value);
             if (meetActivity == null)
             {
                 return NotFound();
@@ -152,23 +126,14 @@ namespace MeetUp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.MeetActivity == null)
-            {
-                return Problem("Entity set 'MeetUpContext.MeetActivity'  is null.");
-            }
-            var meetActivity = await _context.MeetActivity.FindAsync(id);
+
+            var meetActivity = await service.GetById(id);
             if (meetActivity != null)
             {
-                _context.MeetActivity.Remove(meetActivity);
+                service.Delete(meetActivity);
             }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
-        private bool MeetActivityExists(int id)
-        {
-          return (_context.MeetActivity?.Any(e => e.Id == id)).GetValueOrDefault();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

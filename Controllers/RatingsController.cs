@@ -7,36 +7,37 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Data;
 using MeetUp.Models;
+using MeetUp.Interfaces;
 
 namespace MeetUp.Controllers
 {
     public class RatingsController : Controller
     {
-        private readonly MeetUpContext _context;
+        private readonly IRatingService service;
+        private readonly IUserService userService;
 
-        public RatingsController(MeetUpContext context)
+        public RatingsController(IRatingService _service, IUserService _userService)
         {
-            _context = context;
+            service =_service;
+            userService = _userService;
         }
 
         // GET: Ratings
         public async Task<IActionResult> Index()
         {
-            var meetUpContext = _context.Rating.Include(r => r.Reviewee);
-            return View(await meetUpContext.ToListAsync());
+            var ratings = service.GetAll();
+            return View(ratings);
         }
 
         // GET: Ratings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Rating == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var rating = await _context.Rating
-                .Include(r => r.Reviewee)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var rating = service.GetById(id.Value);
             if (rating == null)
             {
                 return NotFound();
@@ -48,7 +49,7 @@ namespace MeetUp.Controllers
         // GET: Ratings/Create
         public IActionResult Create()
         {
-            ViewData["RevieweeId"] = new SelectList(_context.User, "Id", "Id");
+            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "Id");
             return View();
         }
 
@@ -61,34 +62,30 @@ namespace MeetUp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(rating);
-                await _context.SaveChangesAsync();
+                service.Add(rating);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RevieweeId"] = new SelectList(_context.User, "Id", "Id", rating.RevieweeId);
+            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "Id", rating.RevieweeId);
             return View(rating);
         }
 
         // GET: Ratings/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Rating == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var rating = await _context.Rating.FindAsync(id);
+            var rating = await service.GetById(id.Value);
             if (rating == null)
             {
                 return NotFound();
             }
-            ViewData["RevieweeId"] = new SelectList(_context.User, "Id", "Id", rating.RevieweeId);
+            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "Id", rating.RevieweeId);
             return View(rating);
         }
 
-        // POST: Ratings/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Score,Message,RevieweeId")] Rating rating)
@@ -100,39 +97,23 @@ namespace MeetUp.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(rating);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!RatingExists(rating.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
+                service.Update(rating);
             }
-            ViewData["RevieweeId"] = new SelectList(_context.User, "Id", "Id", rating.RevieweeId);
+      
+            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "Id", rating.RevieweeId);
             return View(rating);
         }
 
         // GET: Ratings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Rating == null)
+            if (id == null )
             {
                 return NotFound();
             }
 
-            var rating = await _context.Rating
-                .Include(r => r.Reviewee)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var rating = service.GetById(id.Value);
             if (rating == null)
             {
                 return NotFound();
@@ -146,23 +127,16 @@ namespace MeetUp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Rating == null)
-            {
-                return Problem("Entity set 'MeetUpContext.Rating'  is null.");
-            }
-            var rating = await _context.Rating.FindAsync(id);
+
+            var rating = await service.GetById(id);
             if (rating != null)
             {
-                _context.Rating.Remove(rating);
+                service.Delete(rating);
             }
-            
-            await _context.SaveChangesAsync();
+   
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RatingExists(int id)
-        {
-          return (_context.Rating?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+   
     }
 }

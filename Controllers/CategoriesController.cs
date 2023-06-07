@@ -1,42 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MeetUp.Data;
+﻿using MeetUp.Interfaces;
 using MeetUp.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MeetUp.Controllers
 {
     public class CategoriesController : Controller
     {
-        private readonly MeetUpContext _context;
+        private readonly ICategoryService service;
 
-        public CategoriesController(MeetUpContext context)
+        public CategoriesController(ICategoryService _service)
         {
-            _context = context;
+            service = _service;
         }
 
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-              return _context.Category != null ? 
-                          View(await _context.Category.ToListAsync()) :
-                          Problem("Entity set 'MeetUpContext.Category'  is null.");
+            var categories = service.GetAll();
+            return categories != null ?
+                        View(categories) :
+                        Problem("Entity set 'MeetUpContext.Category'  is null.");
         }
 
         // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Category == null)
+
+            if (id == null)
             {
                 return NotFound();
             }
+            var category = service.GetById(id);
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
                 return NotFound();
@@ -51,31 +46,28 @@ namespace MeetUp.Controllers
             return View();
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
+                service.Add(category);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
         // GET: Categories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Category == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Category.FindAsync(id);
+            var category = service.GetById(id);
             if (category == null)
             {
                 return NotFound();
@@ -83,9 +75,7 @@ namespace MeetUp.Controllers
             return View(category);
         }
 
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
@@ -97,41 +87,34 @@ namespace MeetUp.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+
+                var updated = service.Update(category);
+                if (!updated)
                 {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
+                    return NotFound();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoryExists(category.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
+
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
         // GET: Categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Category == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Category
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var category = await service.GetById(id);
             if (category == null)
             {
                 return NotFound();
             }
+            var deleted = service.Delete(category);
+
 
             return View(category);
         }
@@ -141,23 +124,16 @@ namespace MeetUp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Category == null)
-            {
-                return Problem("Entity set 'MeetUpContext.Category'  is null.");
-            }
-            var category = await _context.Category.FindAsync(id);
+
+            var category = service.GetById(id);
             if (category != null)
             {
-                _context.Category.Remove(category);
+                service.Delete(category.Result);
             }
-            
-            await _context.SaveChangesAsync();
+
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
-        {
-          return (_context.Category?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

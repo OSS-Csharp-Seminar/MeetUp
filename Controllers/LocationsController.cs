@@ -7,36 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Data;
 using MeetUp.Models;
+using MeetUp.Interfaces;
 
 namespace MeetUp.Controllers
 {
     public class LocationsController : Controller
     {
-        private readonly MeetUpContext _context;
+        private readonly ILocationService service;
 
-        public LocationsController(MeetUpContext context)
+        public LocationsController(ILocationService _service)
         {
-            _context = context;
+            service = _service;
         }
 
-        // GET: Locations
         public async Task<IActionResult> Index()
         {
-              return _context.Location != null ? 
-                          View(await _context.Location.ToListAsync()) :
+            var locations = service.GetAll();
+            return locations != null ? 
+                          View(locations) :
                           Problem("Entity set 'MeetUpContext.Location'  is null.");
         }
 
-        // GET: Locations/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Location == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var location = service.GetById(id.Value);
             if (location == null)
             {
                 return NotFound();
@@ -45,37 +44,31 @@ namespace MeetUp.Controllers
             return View(location);
         }
 
-        // GET: Locations/Create
         public IActionResult Create()
         {
             return View();
         }
-
-        // POST: Locations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Longitude,Latitude,City")] Location location)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(location);
-                await _context.SaveChangesAsync();
+                service.Add(location);
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(location);
         }
 
-        // GET: Locations/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Location == null)
+            if (id == null )
             {
                 return NotFound();
             }
 
-            var location = await _context.Location.FindAsync(id);
+            var location = service.GetById(id.Value);
             if (location == null)
             {
                 return NotFound();
@@ -97,23 +90,9 @@ namespace MeetUp.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(location);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LocationExists(location.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+               
+                   service.Update(location);
+
             }
             return View(location);
         }
@@ -121,13 +100,12 @@ namespace MeetUp.Controllers
         // GET: Locations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Location == null)
+            if (id == null )
             {
                 return NotFound();
             }
 
-            var location = await _context.Location
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var location = service.GetById(id.Value);
             if (location == null)
             {
                 return NotFound();
@@ -141,23 +119,17 @@ namespace MeetUp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Location == null)
-            {
-                return Problem("Entity set 'MeetUpContext.Location'  is null.");
-            }
-            var location = await _context.Location.FindAsync(id);
+
+            var location = await service.GetById(id);
             if (location != null)
             {
-                _context.Location.Remove(location);
+                service.Delete(location);
             }
             
-            await _context.SaveChangesAsync();
+        
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LocationExists(int id)
-        {
-          return (_context.Location?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+  
     }
 }

@@ -1,42 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MeetUp.Data;
+﻿using MeetUp.Interfaces;
 using MeetUp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MeetUp.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly MeetUpContext _context;
+        private readonly IUserService service;
 
-        public UsersController(MeetUpContext context)
+        public UsersController(IUserService _service)
         {
-            _context = context;
+            service = _service;
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return _context.User != null ? 
-                          View(await _context.User.ToListAsync()) :
-                          Problem("Entity set 'MeetUpContext.User'  is null.");
+            var users = service.GetAll();
+            return users != null ?
+                        View(users) :
+                        Problem("Entity set 'MeetUpContext.User'  is null.");
         }
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.User == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await service.GetById(id.Value);
             if (user == null)
             {
                 return NotFound();
@@ -51,31 +46,26 @@ namespace MeetUp.Controllers
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FullName,Email,Password,Image")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
+                service.Add(user);
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
         }
 
-        // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.User == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
+            var user = await service.GetById(id.Value);
             if (user == null)
             {
                 return NotFound();
@@ -83,9 +73,6 @@ namespace MeetUp.Controllers
             return View(user);
         }
 
-        // POST: Users/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,Email,Password,Image")] User user)
@@ -97,23 +84,9 @@ namespace MeetUp.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(user);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
+                service.Update(user);
+
             }
             return View(user);
         }
@@ -121,13 +94,12 @@ namespace MeetUp.Controllers
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.User == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var user = await service.GetById(id.Value);
             if (user == null)
             {
                 return NotFound();
@@ -141,23 +113,14 @@ namespace MeetUp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.User == null)
-            {
-                return Problem("Entity set 'MeetUpContext.User'  is null.");
-            }
-            var user = await _context.User.FindAsync(id);
+            var user = await service.GetById(id);
             if (user != null)
             {
-                _context.User.Remove(user);
+                service.Delete(user);
             }
-            
-            await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
-        {
-          return (_context.User?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }
