@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MeetUp.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace MeetUp.Models
 {
+
     public class User
     {
         [Key]
@@ -9,9 +11,9 @@ namespace MeetUp.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public enum Role { ADMIN, USER }
-        public ICollection<MeetActivity> MyActivities{ get; set; }
-        public ICollection<UserActivity> MyUserActivities{ get; set; }
-        public ICollection<Rating> Ratings { get; set; }
+        public Role Role { get; set; }
+        public ICollection<MeetActivity>? MyActivities{ get; set; }
+        public ICollection<UserActivity>? MyUserActivities{ get; set; }
+        public ICollection<Rating>? Ratings { get; set; }
     }
 }
