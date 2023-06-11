@@ -22,7 +22,7 @@ namespace MeetUp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var locations = service.GetAll();
+            var locations = await service.GetAll();
             return locations != null ? 
                           View(locations) :
                           Problem("Entity set 'MeetUpContext.Location'  is null.");

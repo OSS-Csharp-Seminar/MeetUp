@@ -25,7 +25,7 @@ namespace MeetUp.Controllers
         // GET: Ratings
         public async Task<IActionResult> Index()
         {
-            var ratings = service.GetAll();
+            var ratings = await service.GetAll();
             return View(ratings);
         }
 
