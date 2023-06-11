@@ -1,4 +1,5 @@
-﻿using MeetUp.Interfaces;
+﻿using MeetUp.Data;
+using MeetUp.Interfaces;
 using MeetUp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,10 +49,14 @@ namespace MeetUp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FullName,Email,Password,Image")] User user)
+        public async Task<IActionResult> Create([Bind("Id,FullName,Email,Password")] User user)
         {
+         
+      
+    
             if (ModelState.IsValid)
             {
+                user.Role = Role.USER;
                 service.Add(user);
                 return RedirectToAction(nameof(Index));
             }
