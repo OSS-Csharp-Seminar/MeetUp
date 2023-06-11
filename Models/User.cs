@@ -9,7 +9,6 @@ namespace MeetUp.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public byte[] Image { get; set; }
         public enum Role { ADMIN, USER }
         public ICollection<MeetActivity> MyActivities{ get; set; }
         public ICollection<UserActivity> MyUserActivities{ get; set; }
