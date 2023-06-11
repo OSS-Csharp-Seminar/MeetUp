@@ -1,7 +1,7 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+
 
 namespace MeetUp.Controllers
 {
@@ -17,7 +17,7 @@ namespace MeetUp.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-            var users = service.GetAll();
+            var users = await service.GetAll();
             return users != null ?
                         View(users) :
                         Problem("Entity set 'MeetUpContext.User'  is null.");

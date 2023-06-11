@@ -16,7 +16,7 @@ namespace MeetUp.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            var categories = service.GetAll();
+            var categories = await service.GetAll();
             return categories != null ?
                         View(categories) :
                         Problem("Entity set 'MeetUpContext.Category'  is null.");
@@ -26,11 +26,7 @@ namespace MeetUp.Controllers
         public async Task<IActionResult> Details(int id)
         {
 
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var category = service.GetById(id);
+            var category = await service.GetById(id);
 
             if (category == null)
             {
@@ -62,12 +58,8 @@ namespace MeetUp.Controllers
         // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var category = service.GetById(id);
+            var category = await service.GetById(id);
             if (category == null)
             {
                 return NotFound();
@@ -80,10 +72,6 @@ namespace MeetUp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
         {
-            if (id != category.Id)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -103,11 +91,7 @@ namespace MeetUp.Controllers
         // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+  
             var category = await service.GetById(id);
             if (category == null)
             {

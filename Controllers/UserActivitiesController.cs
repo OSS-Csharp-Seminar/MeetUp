@@ -27,8 +27,8 @@ namespace MeetUp.Controllers
         // GET: UserActivities
         public async Task<IActionResult> Index()
         {
-            var userActivities = service.GetAll();
-            return View(await userActivities);
+            var userActivities = await service.GetAll();
+            return View(userActivities);
         }
 
         // GET: UserActivities/Details/5

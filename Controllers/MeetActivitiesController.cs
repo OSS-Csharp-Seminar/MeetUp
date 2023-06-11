@@ -22,7 +22,7 @@ namespace MeetUp.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(service.GetAll().Result);
+            return View(await service.GetAll());
         }
 
         // GET: MeetActivities/Details/5
