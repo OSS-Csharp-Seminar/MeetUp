@@ -10,27 +10,27 @@ namespace MeetUp.Services
         {
             repo = userRepository;
         }
-        public bool Add(User user)
+        public bool Add(AppUser user)
         {
            return repo.Add(user);
         }
 
-        public bool Delete(User user)
+        public bool Delete(AppUser user)
         {
            return repo.Delete(user);
         }
 
-        public Task<ICollection<User>> GetAll()
+        public Task<ICollection<AppUser>> GetAll()
         {
            return repo.GetAll();
         }
 
-        public Task<User> GetById(int id)
+        public Task<AppUser> GetById(int id)
         {
             return repo.GetById(id);
         }
 
-        public bool Update(User user)
+        public bool Update(AppUser user)
         {
            return repo.Update(user);
         }

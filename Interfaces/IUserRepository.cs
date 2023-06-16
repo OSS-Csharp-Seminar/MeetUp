@@ -4,11 +4,11 @@ namespace MeetUp.Interfaces
 {
     public interface IUserRepository
     {
-        Task<ICollection<User>> GetAll();
-        Task<User> GetById(int id);
-        bool Add(User user);
-        bool Update(User user); 
-        bool Delete(User user);
+        Task<ICollection<AppUser>> GetAll();
+        Task<AppUser> GetById(int id);
+        bool Add(AppUser user);
+        bool Update(AppUser user); 
+        bool Delete(AppUser user);
         bool Save();
     }
 }

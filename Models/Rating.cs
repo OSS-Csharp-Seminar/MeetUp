@@ -11,6 +11,6 @@ namespace MeetUp.Models
         public string Message { get; set; }
         [ForeignKey("User")]
         public int RevieweeId { get; set; }
-        public User Reviewee { get; set; }
+        public AppUser Reviewee { get; set; }
     }   
 }

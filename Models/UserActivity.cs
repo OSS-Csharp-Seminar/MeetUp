@@ -8,8 +8,8 @@ namespace MeetUp.Models
         [Key]
         public int Id { get; set; }
         [ForeignKey("User")]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
+        public AppUser User { get; set; }
         [ForeignKey("MeetActivity")]
         public int ActivityId { get; set; }
         public MeetActivity Activity { get; set; }

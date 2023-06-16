@@ -12,15 +12,15 @@ namespace MeetUp.Repositories
         {
             _context = context;
         }
-        public async Task<ICollection<User>> GetAll() {
+        public async Task<ICollection<AppUser>> GetAll() {
             return await _context.User.ToListAsync();
         }
-        public bool Add(User user)
+        public bool Add(AppUser user)
         {
             _context.Add(user);
             return Save();
         }
-        public bool Update(User user)
+        public bool Update(AppUser user)
         {
             _context.Update(user);
             return Save();
@@ -32,12 +32,12 @@ namespace MeetUp.Repositories
             return saved > 0;
         }
 
-        public async Task<User> GetById(int id)
+        public async Task<AppUser> GetById(int id)
         {
             return await _context.User.FirstOrDefaultAsync();
         }
 
-        public bool Delete(User user)
+        public bool Delete(AppUser user)
         {
             throw new NotImplementedException();
         }
