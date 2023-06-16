@@ -4,17 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MeetUp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MeetUp.Data
 {
-    public class MeetUpContext : DbContext
+    public class MeetUpContext : IdentityDbContext<AppUser>
     {
         public MeetUpContext (DbContextOptions<MeetUpContext> options)
             : base(options)
         {
         }
 
-        public DbSet<MeetUp.Models.User> User { get; set; } = default!;
+        public DbSet<MeetUp.Models.AppUser>? User { get; set; }
 
         public DbSet<MeetUp.Models.Category>? Category { get; set; }
 
