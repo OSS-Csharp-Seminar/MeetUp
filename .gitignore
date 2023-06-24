@@ -1,6 +1,7 @@
 ﻿# Ignore build output folders
 bin/
-obj
+obj/
+Debug\
 
 # Ignore NuGet packages
 *.nupkg
@@ -27,3 +28,5 @@ packages/
 # Ignore Resharper files
 _ReSharper*/
 *.resharper
+bin
+obj
