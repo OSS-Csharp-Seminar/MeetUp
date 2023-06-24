@@ -1,11 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using MeetUp.Data;
 using MeetUp.Repositories;
 using MeetUp.Interfaces;
 using MeetUp.Services;
 using MeetUp.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using RunGroopWebApp.Data;
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeetUp.Migrations
 {
     [DbContext(typeof(MeetUpContext))]
-    [Migration("20230613184835_rename-user")]
-    partial class renameuser
+    [Migration("20230624151849_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
