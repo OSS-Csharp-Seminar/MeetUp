@@ -12,16 +12,12 @@ namespace RunGroopWebApp.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly MeetUpContext _context;
-        private readonly ILocationService _locationService;
 
         public AccountController(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             MeetUpContext context,
             ILocationService locationService)
         {
-            _context = context;
-            _locationService = locationService;
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -112,18 +108,6 @@ namespace RunGroopWebApp.Controllers
             return View();
 
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetLocation(string location)
-        //{
-        //    if (location == null)
-        //    {
-        //        return Json("Not found");
-        //    }
-        //    var locationResult = await _locationService.GetLocationSearch(location);
-        //    return Json(locationResult);
-        //}
-
 
     }
 }
