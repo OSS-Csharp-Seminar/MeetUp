@@ -13,13 +13,11 @@ namespace RunGroopWebApp.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-
         public AccountController(UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
             MeetUpContext context,
             ILocationService locationService)
         {
-   
             _signInManager = signInManager;
             _userManager = userManager;
         }
@@ -110,5 +108,6 @@ namespace RunGroopWebApp.Controllers
             return View();
 
         }
+
     }
 }
