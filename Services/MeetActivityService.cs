@@ -11,9 +11,9 @@ namespace MeetUp.Services
             repo = meetActivityRepository;
         }
 
-        public bool Add(MeetActivityViewModel meetActivity)
+        public bool Add(MeetActivityCreateModel meetActivity)
         {
-            return repo.Add(MeetActivityViewModel.To(meetActivity));  
+            return repo.Add(MeetActivityCreateModel.To(meetActivity));  
         }
 
         public bool Delete(Models.MeetActivity meetActivity)
@@ -36,7 +36,7 @@ namespace MeetUp.Services
             return repo.Update(meetActivity);   
         }
 
-        public String Validate(MeetActivityViewModel meetActivity)
+        public String Validate(MeetActivityCreateModel meetActivity)
         {
             if (meetActivity.Time <= DateTime.Now)
             {
