@@ -11,7 +11,7 @@ namespace MeetUp.Models
         public string Description { get; set; }
         public DateTime Time { get; set; }
         public int Capacity { get; set; }
-        public byte[] Picture { get; set; }
+        public byte[]? Picture { get; set; }
         [ForeignKey("Location")]
         public int LocationId { get; set; }
         public Location Location { get; set; }
