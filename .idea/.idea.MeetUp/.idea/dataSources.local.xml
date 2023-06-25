@@ -2,20 +2,8 @@
 <project version="4">
   <component name="dataSourceStorageLocal" created-in="RD-231.9161.46">
     <data-source name="@localhost" uuid="5e5af5ad-5f55-40b5-b532-77c8a95934d9">
-      <database-info product="Microsoft SQL Server" version="16.00.4045" jdbc-version="4.2" driver-name="JetBrains JDBC Driver for SQL Server" driver-version="1.0" dbms="MSSQL" exact-version="16.0.4045" exact-driver-version="1.0">
-        <extra-name-characters>$#@</extra-name-characters>
-        <identifier-quote-string>&quot;</identifier-quote-string>
-      </database-info>
-      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
-      <secret-storage>master_key</secret-storage>
-      <user-name>sa</user-name>
-      <schema-mapping>
-        <introspection-scope>
-          <node kind="database" qname="@">
-            <node kind="schema" qname="@" />
-          </node>
-        </introspection-scope>
-      </schema-mapping>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MSSQL" exact-version="0" />
+      <schema-mapping />
     </data-source>
   </component>
 </project>
