@@ -45,7 +45,7 @@ namespace MeetUp.Controllers
 
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Name");
             ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id");
             return View();
         }

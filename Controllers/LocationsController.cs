@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MeetUp.Data;
 using MeetUp.Models;
 using MeetUp.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MeetUp.Controllers
 {
@@ -50,6 +51,7 @@ namespace MeetUp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+     
         public async Task<IActionResult> Create([Bind("Id,Longitude,Latitude,City")] Location location)
         {
             if (ModelState.IsValid)
@@ -60,7 +62,7 @@ namespace MeetUp.Controllers
             }
             return View(location);
         }
-
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null )
@@ -81,6 +83,7 @@ namespace MeetUp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Longitude,Latitude,City")] Location location)
         {
             if (id != location.Id)
@@ -98,6 +101,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: Locations/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null )
@@ -117,6 +121,7 @@ namespace MeetUp.Controllers
         // POST: Locations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 

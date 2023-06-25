@@ -1,6 +1,5 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
-using MeetUp.Repositories;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -30,7 +29,7 @@ namespace MeetUp.Data
                 {
                     var newAdminUser = new AppUser()
                     {
-                        UserName = "admin",
+                        UserName = "admin@gmail.com",
                         Email = adminUserEmail,
                         EmailConfirmed = true,
 
@@ -46,7 +45,7 @@ namespace MeetUp.Data
                 {
                     var newAppUser = new AppUser()
                     {
-                        UserName = "app-user",
+                        UserName = "app-user@gmail.com",
                         Email = appUserEmail,
                         EmailConfirmed = true,
 
@@ -67,7 +66,7 @@ namespace MeetUp.Data
                 locationRepository.Add(new Location(1.2m, 2.3m, "Makarska"));
             }
         }
-        
+
         public static async Task SeedCategories(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
