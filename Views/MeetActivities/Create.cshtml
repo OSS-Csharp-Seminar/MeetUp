@@ -1,4 +1,4 @@
-﻿@model MeetUp.Models.MeetActivity
+﻿@model MeetUp.ViewModels.MeetActivityViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post">
+        <form asp-action="Create" enctype="multipart/form-data" method="post" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Picture" class="control-label"></label>
-                <input asp-for="Picture" type="file" class="form-control"/>
+                <input asp-for="Picture" type="file" class="form-control" accept=".jpg, .jpeg, .png"/>
                 <span asp-validation-for="Picture" class="text-danger"></span>
             </div>
             <div class="form-group">

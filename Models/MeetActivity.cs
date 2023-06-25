@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MeetUp.ViewModels;
 
 namespace MeetUp.Models
 {
@@ -18,5 +19,16 @@ namespace MeetUp.Models
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
+
+        public MeetActivity(string name, string description, DateTime time, int capacity, byte[]? picture, int locationId, int categoryId)
+        {
+            Name = name;
+            Description = description;
+            Time = time;
+            Capacity = capacity;
+            Picture = picture;
+            LocationId = locationId;
+            CategoryId = categoryId;
+        }
     }
 }

@@ -9,13 +9,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Utils/FileUploadUtils.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/MeetActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/MeetActivity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/MeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/MeetActivityService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
