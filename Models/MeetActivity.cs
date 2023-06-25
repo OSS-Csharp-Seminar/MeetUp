@@ -21,9 +21,9 @@ namespace MeetUp.Models
         public Category? Category { get; set; }
         [ForeignKey("Owner")]
         public string AppUserId { get; set; }
-        public AppUser Owner;
+        public AppUser? Owner;
         
-        public MeetActivity(string name, string description, DateTime time, int capacity, byte[]? picture, int locationId, int categoryId)
+        public MeetActivity(string name, string description, DateTime time, int capacity, byte[]? picture, int locationId, int categoryId, string appUserId)
         {
             Name = name;
             Description = description;
@@ -32,6 +32,7 @@ namespace MeetUp.Models
             Picture = picture;
             LocationId = locationId;
             CategoryId = categoryId;
+            AppUserId = appUserId;
         }
         
     }

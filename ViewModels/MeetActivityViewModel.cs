@@ -13,6 +13,7 @@ public class MeetActivityViewModel
     public IFormFile? Picture { get; set; }
     public int LocationId { get; set; }
     public int CategoryId { get; set; }
+    public string AppUserId { get; set; }
 
     public static MeetActivity To(MeetActivityViewModel model)
     {
@@ -28,6 +29,7 @@ public class MeetActivityViewModel
             model.Capacity,
             picture,
             model.LocationId,
-            model.CategoryId);
+            model.CategoryId,
+            model.AppUserId);
     }
 }
