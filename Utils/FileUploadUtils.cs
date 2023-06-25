@@ -18,12 +18,4 @@ public class FileUploadUtils
         return new byte[0];
         // TODO: Throw exception
     }
-
-    public static Image byteArrayToImage(byte[] bytes)
-    {
-        MemoryStream ms = new MemoryStream(bytes,0,bytes.Length);
-        ms.Write(bytes, 0, bytes.Length);
-        return Image.FromStream(ms,true);//Exception occurs here
-
-    }
 }

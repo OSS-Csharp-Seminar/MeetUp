@@ -14,10 +14,17 @@
     @foreach (var item in Model) {
             <div class="col-3 mb-3">
                 <div class="card" style="width: 18rem;">
-                    <img src='@Url.Action( "Show", "image", new { activityId = item.Id })' />
+                    @if (item.Picture == null)
+                    {
+                        <img src='./placeholder.jpg'/>
+                    }
+                    else
+                    {
+                        <img src='@Url.Action("Show", "image", new { activityId = item.Id })'/>
+                    }
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Time)</p>
                         <a asp-action="Details" class="btn btn-primary" asp-route-id="@item.Id">Details</a>
                     </div>
                 </div>

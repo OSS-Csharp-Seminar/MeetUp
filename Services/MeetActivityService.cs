@@ -13,7 +13,7 @@ namespace MeetUp.Services
 
         public bool Add(MeetActivityViewModel meetActivity)
         {
-            return repo.Add(MeetActivityViewModel.to(meetActivity));  
+            return repo.Add(MeetActivityViewModel.To(meetActivity));  
         }
 
         public bool Delete(Models.MeetActivity meetActivity)

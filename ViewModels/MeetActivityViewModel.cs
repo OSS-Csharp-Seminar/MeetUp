@@ -10,45 +10,24 @@ public class MeetActivityViewModel
     public string Description { get; set; }
     public DateTime Time { get; set; }
     public int Capacity { get; set; }
-    public IFormFile Picture { get; set; }
+    public IFormFile? Picture { get; set; }
     public int LocationId { get; set; }
     public int CategoryId { get; set; }
 
-    private MeetActivityViewModel(int id, string name, string description, DateTime time, int capacity, FormFile picture, int locationId, int categoryId)
+    public static MeetActivity To(MeetActivityViewModel model)
     {
-        Id = id;
-        Name = name;
-        Description = description;
-        Time = time;
-        Capacity = capacity;
-        Picture = picture;
-        LocationId = locationId;
-        CategoryId = categoryId;
-    }
-    
-    public static MeetActivity to(MeetActivityViewModel model)
-    {
+        byte[] picture = null;
+        if (model.Picture != null)
+        {
+            picture = FileUploadUtils.FileToBytes(model.Picture);
+        }
         return new MeetActivity(
             model.Name,
             model.Description,
             model.Time,
             model.Capacity,
-            FileUploadUtils.FileToBytes(model.Picture),
+            picture,
             model.LocationId,
             model.CategoryId);
-    }
-    
-    public static MeetActivityViewModel from(MeetActivity entity)
-    {
-        var memoryStream = new MemoryStream(entity.Picture);
-        return new MeetActivityViewModel(
-            entity.Id,
-            entity.Name,
-            entity.Description,
-            entity.Time,
-            entity.Capacity,
-            new FormFile(memoryStream, 0, memoryStream.Length, "picture", "picture_"+entity.Id),
-            entity.LocationId,
-            entity.CategoryId);
     }
 }

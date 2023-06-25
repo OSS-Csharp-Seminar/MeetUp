@@ -52,7 +52,7 @@ namespace MeetUp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Time,Capacity,Picture,LocationId,CategoryId")] MeetActivityViewModel meetActivity)
+        public async Task<IActionResult> Create(MeetActivityViewModel meetActivity)
         {
             var errors = service.Validate(meetActivity);
             if (errors.Length == 0)
