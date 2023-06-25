@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MeetUp.Data;
 using MeetUp.Models;
 using MeetUp.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace MeetUp.Controllers
 {
@@ -48,29 +49,16 @@ namespace MeetUp.Controllers
             return View(userActivity);
         }
 
-        // GET: UserActivities/Create
-        public IActionResult Create()
-        {
-            ViewData["ActivityId"] = new SelectList(meetActivityService.GetAll().Result, "Id", "Id");
-            ViewData["UserId"] = new SelectList(userService.GetAll().Result, "Id", "Id");
-            return View();
-        }
-
         // POST: UserActivities/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,ActivityId")] UserActivity userActivity)
+        public async Task<IActionResult> Create(int activityId)
         {
-            if (ModelState.IsValid)
-            {
-                service.Add(userActivity);
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ActivityId"] = new SelectList(meetActivityService.GetAll().Result, "Id", "Id");
-            ViewData["UserId"] = new SelectList(userService.GetAll().Result, "Id", "Id");
-            return View(userActivity);
+            var userActivity = new UserActivity();
+            //TODO: Handle non logged in access
+            userActivity.UserId = User.Identity.GetUserId();
+            userActivity.ActivityId = activityId;
+            service.Add(userActivity);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: UserActivities/Edit/5

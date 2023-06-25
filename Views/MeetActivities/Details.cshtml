@@ -1,60 +1,58 @@
-﻿@model MeetUp.Models.MeetActivity
+﻿@model MeetUp.ViewModels.MeetActivityViewModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Model.meetActivity.Name</h1>
 
 <div>
-    <h4>MeetActivity</h4>
+    <h4>@Model.meetActivity.Time</h4>
     <hr />
     <dl class="row">
+        @if (Model.meetActivity.Picture != null){
+            <img src='@Url.Action("Show", "image", new { activityId = Model.meetActivity.Id })'/>
+        }
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.meetActivity.Description)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.meetActivity.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.meetActivity.Capacity)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.meetActivity.Capacity)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Time)
+            @Html.DisplayNameFor(model => model.meetActivity.Location.City)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Time)
-        </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capacity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capacity)
-        </dd>
+            @Html.DisplayFor(model => model.meetActivity.Location.City)
+            </dt>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Picture)
+            @Html.DisplayNameFor(model => model.meetActivity.Category)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Picture)
+            @Html.DisplayFor(model => model.meetActivity.Category)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Location)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Location.Id)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Id)
+        <h2>Members</h2>
+        @foreach (var item in @Model.members)
+        {
+            <dd class="col-sm-10">
+                @item.Email
+            </dd>
+        }
+        <dd>
+            <form action="@Url.Action("Create", "userActivities", new { activityId = Model.meetActivity.Id })" method="post">
+                <button type="submit">Join</button>
+            </form>
         </dd>
     </dl>
+    
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.meetActivity.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
