@@ -7,18 +7,23 @@ using MeetUp.Services;
 using MeetUp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using RunGroopWebApp.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MeetUpContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("MeetUpContext") ?? throw new InvalidOperationException("Connection string 'MeetUpContext' not found.")));
 
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<MeetUpContext>();
+builder.Services.AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<MeetUpContext>()
+    .AddDefaultTokenProviders();
 //builder.Services.AddIdentity<AppUser, IdentityRole>()
 //    .AddEntityFrameworkStores<MeetUpContext>();
+
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
@@ -31,11 +36,23 @@ builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IMeetActivityService, MeetActivityService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IUserActivityService, UserActivityService>();
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    // Cookie settings
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+    options.LoginPath = "/Identity/Account/Login";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;
+});
 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddMvc();
 var app = builder.Build();
 
 
@@ -60,9 +77,10 @@ app.UseRouting();
 app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapDefaultControllerRoute();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=MeetActivities}/{action=Index}/{id?}");
 
 app.Run();
