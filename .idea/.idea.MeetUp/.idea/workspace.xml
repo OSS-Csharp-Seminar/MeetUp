@@ -9,14 +9,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Utils/FileUploadUtils.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controllers/ImageController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/MeetActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/MeetActivity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/MeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/MeetActivityService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Utils/FileUploadUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/FileUploadUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +29,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b3b9e299891b4a5e01aa09765d36eefe19ff191ead020be8e6a44386f607971/ValidateAntiForgeryTokenAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b9139e63615f434419f750917a67741a77467f1f478dcf836ddd3c78b8d837d/RoleManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d555b6bc78df652895d9bf368762f415ad13deb21ca2dc977dd48593f46e2/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f324c62785677b53e916aa9084ae54a42014c79d132908ae191cf8e3af4cfb/File.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
@@ -120,5 +119,24 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Controllers/ImageController.cs</url>
+          <line>18</line>
+          <properties documentPath="C:\Users\Bartul\Documents\git\MeetUp\Controllers\ImageController.cs" initialLine="14" containingFunctionPresentation="Method 'Show'">
+            <startOffsets>
+              <option value="490" />
+            </startOffsets>
+            <endOffsets>
+              <option value="528" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

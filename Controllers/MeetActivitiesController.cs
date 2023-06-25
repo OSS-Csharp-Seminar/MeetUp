@@ -23,7 +23,7 @@ namespace MeetUp.Controllers
         // GET: MeetActivities
         public async Task<IActionResult> Index()
         {
-
+            //TODO: Replace NULL pictures with placeholders
             return View(await service.GetAll());
         }
 

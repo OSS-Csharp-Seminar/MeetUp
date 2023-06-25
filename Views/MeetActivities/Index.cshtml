@@ -14,7 +14,7 @@
     @foreach (var item in Model) {
             <div class="col-3 mb-3">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <img src='@Url.Action( "Show", "image", new { activityId = item.Id })' />
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
                         <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
