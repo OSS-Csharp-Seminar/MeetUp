@@ -1,5 +1,6 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
+using MeetUp.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,7 +23,6 @@ namespace MeetUp.Controllers
         // GET: MeetActivities
         public async Task<IActionResult> Index()
         {
-
             return View(await service.GetAll());
         }
 
@@ -51,7 +51,7 @@ namespace MeetUp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Time,Capacity,Picture,LocationId,CategoryId")] MeetActivity meetActivity)
+        public async Task<IActionResult> Create(MeetActivityViewModel meetActivity)
         {
             var errors = service.Validate(meetActivity);
             if (errors.Length == 0)

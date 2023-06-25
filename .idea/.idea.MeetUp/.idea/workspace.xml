@@ -9,16 +9,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources/5e5af5ad-5f55-40b5-b532-77c8a95934d9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources/5e5af5ad-5f55-40b5-b532-77c8a95934d9.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Models/MeetActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/MeetActivity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="main" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2e175135818cfaa43219c305447e9253bdb14d04c54ddbde459f2779aea1b0/IRoleStore.cs" root0="SKIP_HIGHLIGHTING" />
@@ -28,8 +29,13 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b3b9e299891b4a5e01aa09765d36eefe19ff191ead020be8e6a44386f607971/ValidateAntiForgeryTokenAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b9139e63615f434419f750917a67741a77467f1f478dcf836ddd3c78b8d837d/RoleManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d555b6bc78df652895d9bf368762f415ad13deb21ca2dc977dd48593f46e2/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f324c62785677b53e916aa9084ae54a42014c79d132908ae191cf8e3af4cfb/File.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/ImageController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/ImageController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/MeetActivitiesController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" root0="FORCE_HIGHLIGHTING" />

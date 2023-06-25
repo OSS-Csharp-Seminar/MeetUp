@@ -1,4 +1,5 @@
 ﻿using MeetUp.Interfaces;
+using MeetUp.ViewModels;
 
 namespace MeetUp.Services
 {
@@ -10,9 +11,9 @@ namespace MeetUp.Services
             repo = meetActivityRepository;
         }
 
-        public bool Add(Models.MeetActivity meetActivity)
+        public bool Add(MeetActivityViewModel meetActivity)
         {
-            return repo.Add(meetActivity);  
+            return repo.Add(MeetActivityViewModel.To(meetActivity));  
         }
 
         public bool Delete(Models.MeetActivity meetActivity)
@@ -35,7 +36,7 @@ namespace MeetUp.Services
             return repo.Update(meetActivity);   
         }
 
-        public String Validate(Models.MeetActivity meetActivity)
+        public String Validate(MeetActivityViewModel meetActivity)
         {
             if (meetActivity.Time <= DateTime.Now)
             {

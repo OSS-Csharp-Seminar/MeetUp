@@ -1,5 +1,6 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
+using MeetUp.Repositories;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -66,7 +67,7 @@ namespace MeetUp.Data
                 locationRepository.Add(new Location(1.2m, 2.3m, "Makarska"));
             }
         }
-
+        
         public static async Task SeedCategories(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
