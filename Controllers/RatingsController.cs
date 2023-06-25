@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MeetUp.Data;
 using MeetUp.Models;
 using MeetUp.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MeetUp.Controllers
 {
@@ -106,6 +107,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: Ratings/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null )
@@ -125,6 +127,7 @@ namespace MeetUp.Controllers
         // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 
