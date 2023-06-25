@@ -1,12 +1,8 @@
-﻿using MeetUp.Data;
-using MeetUp.Interfaces;
-using MeetUp.Models;
+﻿using MeetUp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using MeetUp.ViewModels;
-using RunGroopWebApp.ViewModels;
 
-namespace RunGroopWebApp.Controllers
+namespace MeetUp.Controllers
 {
     public class AccountController : Controller
     {

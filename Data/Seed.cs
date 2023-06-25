@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 
 
-namespace RunGroopWebApp.Data
+namespace MeetUp.Data
 {
     public class Seed
     {
