@@ -10,11 +10,12 @@
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Seed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Seed.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Category.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Location.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Location.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/MeetActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/MeetActivity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/MeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/MeetActivityService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,12 +24,17 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2e175135818cfaa43219c305447e9253bdb14d04c54ddbde459f2779aea1b0/IRoleStore.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6f014f3450cd40ef82e4f71146a47afd19ff3c53e3b5182cd307757bf7763/ModelStateDictionary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/acf1b6abd0c65bfb4dd378fac91ee884d46073faa6295340469651abdca69/PageModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b1d8ea2ef040e2f7d271df55c8ab95864363cad768f2153833f8ba6c43aaa/IEmailSender.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b3b9e299891b4a5e01aa09765d36eefe19ff191ead020be8e6a44386f607971/ValidateAntiForgeryTokenAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b9139e63615f434419f750917a67741a77467f1f478dcf836ddd3c78b8d837d/RoleManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d555b6bc78df652895d9bf368762f415ad13deb21ca2dc977dd48593f46e2/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

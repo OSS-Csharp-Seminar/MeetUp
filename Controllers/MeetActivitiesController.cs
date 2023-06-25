@@ -1,5 +1,6 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -50,16 +51,17 @@ namespace MeetUp.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,Description,Time,Capacity,Picture,LocationId,CategoryId")] MeetActivity meetActivity)
         {
-            if (ModelState.IsValid)
+            var errors = service.Validate(meetActivity);
+            if (errors.Length == 0)
             {
                 service.Add(meetActivity);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Category"] = new SelectList(categoryService.GetAll().Result, "Name", "Name", meetActivity.CategoryId);
-            ViewData["Location"] = new SelectList(locationService.GetAll().Result, "Name", "Name", meetActivity.LocationId);
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");
+            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id");
+            ViewData["Errors"] = errors;
             return View(meetActivity);
         }
 
@@ -112,7 +114,7 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
 
-            var meetActivity = service.GetById(id.Value);
+            var meetActivity = service.GetById(id.Value).Result;
             if (meetActivity == null)
             {
                 return NotFound();

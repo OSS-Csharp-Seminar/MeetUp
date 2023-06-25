@@ -34,5 +34,15 @@ namespace MeetUp.Services
         {
             return repo.Update(meetActivity);   
         }
+
+        public String Validate(Models.MeetActivity meetActivity)
+        {
+            if (meetActivity.Time <= DateTime.Now)
+            {
+                return "Date cannot be in the past.";
+            }
+
+            return "";
+        }
     }
 }

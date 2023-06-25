@@ -9,5 +9,6 @@ namespace MeetUp.Interfaces
         bool Add(MeetActivity meetActivity);
         bool Update(MeetActivity meetActivity);
         bool Delete(MeetActivity meetActivity);
+        String Validate(MeetActivity meetActivity);
     }
 }
