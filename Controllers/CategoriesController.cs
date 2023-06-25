@@ -1,5 +1,7 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeetUp.Controllers
@@ -14,6 +16,8 @@ namespace MeetUp.Controllers
         }
 
         // GET: Categories
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index()
         {
             var categories = await service.GetAll();
@@ -23,6 +27,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: Categories/Details/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Details(int id)
         {
 
@@ -37,6 +42,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -44,6 +50,7 @@ namespace MeetUp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
             if (ModelState.IsValid)
@@ -56,6 +63,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -70,6 +78,7 @@ namespace MeetUp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
         {
 
@@ -89,6 +98,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
         {
   
@@ -106,6 +116,7 @@ namespace MeetUp.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 

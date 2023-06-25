@@ -16,6 +16,8 @@
           </node>
         </introspection-scope>
       </schema-mapping>
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MSSQL" exact-version="0" />
+      <schema-mapping />
     </data-source>
   </component>
 </project>

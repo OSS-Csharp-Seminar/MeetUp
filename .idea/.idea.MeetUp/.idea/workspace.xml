@@ -18,6 +18,11 @@
       <change beforePath="$PROJECT_DIR$/Utils/FileUploadUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Utils/FileUploadUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources/5e5af5ad-5f55-40b5-b532-77c8a95934d9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources/5e5af5ad-5f55-40b5-b532-77c8a95934d9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/MeetActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/MeetActivity.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +44,7 @@
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/ImageController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/ImageController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/MeetActivitiesController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -123,6 +129,17 @@
     <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>

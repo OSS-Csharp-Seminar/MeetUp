@@ -30,7 +30,7 @@ namespace MeetUp.Data
                 {
                     var newAdminUser = new AppUser()
                     {
-                        UserName = "admin",
+                        UserName = "admin@gmail.com",
                         Email = adminUserEmail,
                         EmailConfirmed = true,
 
@@ -46,7 +46,7 @@ namespace MeetUp.Data
                 {
                     var newAppUser = new AppUser()
                     {
-                        UserName = "app-user",
+                        UserName = "app-user@gmail.com",
                         Email = appUserEmail,
                         EmailConfirmed = true,
 

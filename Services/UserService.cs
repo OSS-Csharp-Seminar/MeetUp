@@ -25,7 +25,7 @@ namespace MeetUp.Services
            return repo.GetAll();
         }
 
-        public Task<AppUser> GetById(int id)
+        public Task<AppUser> GetById(string id)
         {
             return repo.GetById(id);
         }

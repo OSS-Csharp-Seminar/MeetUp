@@ -23,7 +23,6 @@ namespace MeetUp.Controllers
         // GET: MeetActivities
         public async Task<IActionResult> Index()
         {
-            //TODO: Replace NULL pictures with placeholders
             return View(await service.GetAll());
         }
 
@@ -46,7 +45,7 @@ namespace MeetUp.Controllers
 
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Name");
             ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id");
             return View();
         }
@@ -57,6 +56,7 @@ namespace MeetUp.Controllers
             var errors = service.Validate(meetActivity);
             if (errors.Length == 0)
             {
+                meetActivity.AppUserId = User.Identity.GetUserId();
                 service.Add(meetActivity);
                 return RedirectToAction(nameof(Index));
             }

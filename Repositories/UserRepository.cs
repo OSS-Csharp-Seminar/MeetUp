@@ -32,7 +32,7 @@ namespace MeetUp.Repositories
             return saved > 0;
         }
 
-        public async Task<AppUser> GetById(int id)
+        public async Task<AppUser> GetById(string id)
         {
             return await _context.User.FirstOrDefaultAsync();
         }
