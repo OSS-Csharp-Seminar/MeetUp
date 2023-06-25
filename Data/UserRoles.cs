@@ -1,4 +1,4 @@
-﻿namespace RunGroopWebApp.Data
+﻿namespace MeetUp.Data
 {
     public static class UserRoles
     {

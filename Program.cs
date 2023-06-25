@@ -6,9 +6,7 @@ using MeetUp.Interfaces;
 using MeetUp.Services;
 using MeetUp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using RunGroopWebApp.Data;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MeetUpContext>(options =>

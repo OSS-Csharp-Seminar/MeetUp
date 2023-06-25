@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RunGroopWebApp.ViewModels
+namespace MeetUp.ViewModels
 {
     public class RegisterViewModel
     {
