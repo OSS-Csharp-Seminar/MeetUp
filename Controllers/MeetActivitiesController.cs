@@ -56,6 +56,7 @@ namespace MeetUp.Controllers
             var errors = service.Validate(meetActivity);
             if (errors.Length == 0)
             {
+                meetActivity.AppUserId = User.Identity.GetUserId();
                 service.Add(meetActivity);
                 return RedirectToAction(nameof(Index));
             }
