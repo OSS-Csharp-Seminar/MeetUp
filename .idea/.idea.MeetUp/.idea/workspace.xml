@@ -9,14 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Views/UserActivities/Owned.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources/5e5af5ad-5f55-40b5-b532-77c8a95934d9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/dataSources/5e5af5ad-5f55-40b5-b532-77c8a95934d9.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Controllers/UserActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserActivitiesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/IUserActivityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IUserActivityRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Interfaces/IUserActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IUserActivityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositories/UserActivityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/UserActivityRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Services/UserActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/UserActivityService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/UserActivities/Owned.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/UserActivities/Owned.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -8,6 +8,7 @@ namespace MeetUp.Interfaces
         Task<UserActivity> GetById(int id);
         Task<ICollection<AppUser>> GetUsersByActivityId(int activityId);
         Task<ICollection<UserActivity>> GetByActivityOwner(string userId);
+        void Approve(string userId, int activityId);
         bool Add(string userId, int activityId);
         bool Update(UserActivity userActivity);
         bool Delete(UserActivity userActivity);

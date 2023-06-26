@@ -12,5 +12,6 @@ namespace MeetUp.Interfaces
         bool Delete(UserActivity userActivity);
         bool Save();
         Task<ICollection<UserActivity>> GetActivitiesByUserId(string id);
+        Task<UserActivity> GetByUserAndActivity(string userId, int activityId);
     }
 }
