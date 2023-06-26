@@ -4,72 +4,76 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>User</h4>
+    <h4>@Html.DisplayFor(model => model.User.Email)</h4>
+    @if (Model.AverageScore == double.NaN)
+    {
+        <p>No reviews</p>
+    }
+    else
+    {
+        <p>
+           Average rating: @Html.DisplayFor(model=> model.AverageScore)
+        </p>
+       
+    }
+
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.User.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ReviewScore)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ReviewScore)
-        </dd>
- 
-    </dl>
 </div>
 
-<h4>Ratings</h4>
-@if (Model.Ratings.Count > 0)
-{
-    @foreach (var item in Model.Ratings)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Score)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
-           
 
-        </tr>
-    }
-}
-else
-{
-    <p>No reviews</p>   
-}
-<h4>Activities</h4>
-@if (Model.UserActivities.Count > 0)
-{
-    @foreach (var item in Model.UserActivities)
-    {
-        <tr>
+<div class="d-flex w-100 ">
+    <div class="w-50">
+        <h4>Ratings</h4>
+        @if (Model.Ratings.Count > 0)
+        {
             
-            <td>
-                @Html.DisplayFor(modelItem => item.Activity.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Activity.Time)
-            </td>
+            @foreach (var item in Model.Ratings)
+            {
+                <div class="w-50 mb-1 p-1 border outline">
+                  Score:  @Html.DisplayFor(modelItem => item.Score) <br>
+                    @Html.DisplayFor(modelItem => item.Message)
+                </div>
+               
+            }
+           
+        }
+        else
+        {
+            <p>No reviews</p>
+        }
+    </div>
+    <div class="w-50">
+        <h4>Activities</h4>
+        @if (Model.UserActivities.Count > 0)
+        {
+            @foreach (var item in Model.UserActivities)
+            {
+                <tr>
 
-        </tr>
-    }
-}
-else
-{
-    <p>No activities</p>
-}
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Activity.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Activity.Time)
+                    </td>
 
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.User.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                </tr>
+            }
+        }
+        else
+        {
+            <p>No activities</p>
+        }
+    </div>
 </div>
+
+
+@if (User.IsInRole("admin"))
+{
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.User.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+}
+

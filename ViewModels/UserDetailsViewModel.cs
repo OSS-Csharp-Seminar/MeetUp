@@ -6,23 +6,24 @@ namespace MeetUp.ViewModels
     {
         public AppUser User{ get; set; }
         public ICollection<Rating> Ratings { get; set; }
-        public double ReviewScore { get; set; }
         public ICollection<UserActivity> UserActivities { get; set; }
+        public double AverageScore { get; set; }
         public UserDetailsViewModel(ICollection<Rating> ratings, ICollection<UserActivity> userActivities, AppUser user)
         {
             Ratings = ratings;
             UserActivities = userActivities;
             User = user;
 
+        }
+        public void CalculateAverageScore()
+        {
             double sum = 0;
-            foreach (Rating rating in ratings)
+            foreach (Rating rating in Ratings)
             {
-                sum += rating.Score;
+                sum = sum + rating.Score;
             }
-
-
-            ReviewScore = sum/Ratings.Count;
-
+           
+            AverageScore =  sum / Ratings.Count;
         }
 
     }

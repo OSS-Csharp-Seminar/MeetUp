@@ -63,7 +63,7 @@ namespace MeetUp.Controllers
         {
             if (ModelState.IsValid)
             {
-                service.Add(rating);
+                var result = service.Add(rating);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName", rating.RevieweeId);
@@ -71,14 +71,15 @@ namespace MeetUp.Controllers
         }
 
         // GET: Ratings/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var rating = await service.GetById(id.Value);
+            var rating = await service.GetById(id);
             if (rating == null)
             {
                 return NotFound();
@@ -107,15 +108,16 @@ namespace MeetUp.Controllers
         }
 
         // GET: Ratings/Delete/5
+        [HttpGet]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null )
             {
                 return NotFound();
             }
 
-            var rating = service.GetById(id.Value);
+            var rating = await service.GetById(id);
             if (rating == null)
             {
                 return NotFound();

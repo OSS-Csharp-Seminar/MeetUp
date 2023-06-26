@@ -40,8 +40,11 @@ namespace MeetUp.Services
             AppUser user = await repo.GetById(id);
             ICollection<Rating> ratings = await ratingRepository.GetRatingByUserId(id);
             ICollection<UserActivity> userActivities = await activityRepository.GetActivitiesByUserId(id);
+            UserDetailsViewModel viewModel = new UserDetailsViewModel(ratings, userActivities, user);
 
-            return new UserDetailsViewModel(ratings, userActivities, user);
+            viewModel.CalculateAverageScore();
+
+            return viewModel;
         }
 
         public bool Update(AppUser user)
