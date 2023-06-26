@@ -10,5 +10,6 @@ namespace MeetUp.Interfaces
         bool Update(Rating rating);
         bool Delete(Rating rating);
         bool Save();
+        Task<ICollection<Rating>> GetRatingByUserId(string id);
     }
 }

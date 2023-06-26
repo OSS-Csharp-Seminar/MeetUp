@@ -10,5 +10,6 @@ namespace MeetUp.Interfaces
         bool Update(UserActivity userActivity);
         bool Delete(UserActivity userActivity);
         bool Save();
+        Task<ICollection<UserActivity>> GetActivitiesByUserId(string id);
     }
 }

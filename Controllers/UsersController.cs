@@ -32,13 +32,13 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
 
-            var user = await service.GetById(id);
-            if (user == null)
+            var result = await service.GetUserDetails(id);
+            if (result == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(result);
         }
         [Authorize(Roles = "admin")]
         // GET: Users/Create
