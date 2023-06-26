@@ -1,18 +1,20 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
-using Microsoft.AspNet.Identity;
+using Microsoft.VisualBasic;
 
 namespace MeetUp.Services
 {
     public class UserActivityService : IUserActivityService
     {
         private readonly IUserActivityRepository repo;
+        private readonly IUserService userService;
         private readonly IMeetActivityService meetActivityService;
         
-        public UserActivityService(IUserActivityRepository userActivityRepository, IMeetActivityService meetActivityService)
+        public UserActivityService(IUserActivityRepository userActivityRepository, IMeetActivityService meetActivityService, IUserService userService)
         {
             repo = userActivityRepository;
             this.meetActivityService = meetActivityService;
+            this.userService = userService;
         }
 
         public Task<ICollection<AppUser>> GetUsersByActivityId(int activityId)
@@ -20,10 +22,26 @@ namespace MeetUp.Services
             return repo.GetUsersByActivityId(activityId);
         }
 
-        public bool Add(UserActivity userActivity)
+        public async Task<ICollection<UserActivity>> GetByActivityOwner(string userId)
         {
-            //TODO: This should throw exception instead of bool, when FE can handle it
-            if (validate(userActivity))
+            var userActivities = repo.GetAll().Result;
+            foreach (UserActivity userActivity in userActivities)
+            {
+                if (userActivity.Activity.AppUserId != userId)
+                {
+                    userActivities.Remove(userActivity);
+                }
+            }
+
+            return userActivities;
+        }
+
+        public bool Add(string userId, int activityId)
+        {
+            var userActivity = new UserActivity();
+            userActivity.UserId = userId;
+            userActivity.ActivityId = activityId;
+            if (!GetUsersByActivityId(activityId).Result.Contains(userService.GetById(userId).Result))
             {
                 return repo.Add(userActivity);
             }
@@ -49,17 +67,6 @@ namespace MeetUp.Services
         public bool Update(UserActivity userActivity)
         {
            return repo.Update(userActivity);
-        }
-
-        private bool validate(UserActivity userActivity)
-        {
-            var activity = meetActivityService.GetById(userActivity.ActivityId).Result;
-            if (GetAll().Result.Count >= activity.Capacity)
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }

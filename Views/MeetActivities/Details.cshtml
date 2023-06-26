@@ -44,11 +44,14 @@
                 @item.Email
             </dd>
         }
-        <dd>
-            <form action="@Url.Action("Create", "userActivities", new { activityId = Model.meetActivity.Id })" method="post">
-                <button type="submit">Join</button>
-            </form>
-        </dd>
+        @if ((@Model.meetActivity.Capacity > @Model.members.Count) && (User.Identity.IsAuthenticated))
+        {
+            <dd>
+                <form action="@Url.Action("Create", "userActivities", new { activityId = Model.meetActivity.Id })" method="post">
+                    <button type="submit">Join</button>
+                </form>
+            </dd>
+        }
     </dl>
     
 </div>

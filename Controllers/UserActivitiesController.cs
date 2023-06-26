@@ -31,6 +31,12 @@ namespace MeetUp.Controllers
             var userActivities = await service.GetAll();
             return View(userActivities);
         }
+        // GET: OwnedUserActivities
+        public async Task<IActionResult> Owned()
+        {
+            var userActivities = await service.GetByActivityOwner(User.Identity.GetUserId());
+            return View(userActivities);
+        }
 
         // GET: UserActivities/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -53,11 +59,7 @@ namespace MeetUp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(int activityId)
         {
-            var userActivity = new UserActivity();
-            //TODO: Handle non logged in access
-            userActivity.UserId = User.Identity.GetUserId();
-            userActivity.ActivityId = activityId;
-            service.Add(userActivity);
+            service.Add(User.Identity.GetUserId(), activityId);
             return RedirectToAction(nameof(Index));
         }
 
