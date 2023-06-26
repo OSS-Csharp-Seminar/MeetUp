@@ -1,4 +1,4 @@
-﻿@model MeetUp.Models.AppUser
+﻿@model MeetUp.ViewModels.UserDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,27 +11,65 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UserName)
+            @Html.DisplayNameFor(model => model.User.Email)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.User.Email)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ReviewScore)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReviewScore)
         </dd>
-     @*   <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Password)
-        </dd>*@
-  
+ 
     </dl>
 </div>
+
+<h4>Ratings</h4>
+@if (Model.Ratings.Count > 0)
+{
+    @foreach (var item in Model.Ratings)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+           
+
+        </tr>
+    }
+}
+else
+{
+    <p>No reviews</p>   
+}
+<h4>Activities</h4>
+@if (Model.UserActivities.Count > 0)
+{
+    @foreach (var item in Model.UserActivities)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Activity.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Activity.Time)
+            </td>
+
+        </tr>
+    }
+}
+else
+{
+    <p>No activities</p>
+}
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.User.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

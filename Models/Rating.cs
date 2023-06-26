@@ -7,10 +7,11 @@ namespace MeetUp.Models
     {
         [Key]
         public int Id { get; set; }
+        [Range(1,5)]
         public int Score { get; set; }
         public string Message { get; set; }
         [ForeignKey("User")]
-        public int RevieweeId { get; set; }
-        public AppUser Reviewee { get; set; }
+        public string RevieweeId { get; set; }
+        public AppUser? Reviewee { get; set; }
     }   
 }
