@@ -50,7 +50,7 @@ namespace MeetUp.Controllers
         // GET: Ratings/Create
         public IActionResult Create()
         {
-            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "Id");
+            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName");
             return View();
         }
 
@@ -66,7 +66,7 @@ namespace MeetUp.Controllers
                 service.Add(rating);
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "Id", rating.RevieweeId);
+            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName", rating.RevieweeId);
             return View(rating);
         }
 
@@ -83,7 +83,7 @@ namespace MeetUp.Controllers
             {
                 return NotFound();
             }
-            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "Id", rating.RevieweeId);
+            ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName", rating.RevieweeId);
             return View(rating);
         }
 
