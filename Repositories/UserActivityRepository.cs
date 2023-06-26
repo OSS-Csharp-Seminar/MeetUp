@@ -40,6 +40,11 @@ namespace MeetUp.Repositories
             return _context.UserActivity.Where(userActivity => userActivity.ActivityId == activityId)
                 .Select(userActivity => userActivity.User).ToList();
         }
+        
+        public async Task<UserActivity> GetByUserAndActivity(string userId, int activityId)
+        {
+            return await _context.UserActivity.Where(userActivity => userActivity.ActivityId == activityId && userActivity.UserId == userId).FirstOrDefaultAsync();
+        }
 
         public async Task<UserActivity> GetById(int id)
         {

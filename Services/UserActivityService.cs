@@ -36,6 +36,13 @@ namespace MeetUp.Services
             return userActivities;
         }
 
+        public void Approve(string userId, int activityId)
+        {
+            var userActivity = repo.GetByUserAndActivity(userId, activityId).Result;
+            userActivity.Approved = true;
+            repo.Update(userActivity);
+        }
+
         public bool Add(string userId, int activityId)
         {
             var userActivity = new UserActivity();

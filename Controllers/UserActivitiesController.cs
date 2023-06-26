@@ -55,6 +55,13 @@ namespace MeetUp.Controllers
             return View(userActivity);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Approve(string userId, int activityId)
+        {
+            service.Approve(userId, activityId);
+            return RedirectToAction(nameof(Owned));
+        }
+
         // POST: UserActivities/Create
         [HttpPost]
         public async Task<IActionResult> Create(int activityId)
