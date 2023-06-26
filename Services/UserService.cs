@@ -1,14 +1,19 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
+using MeetUp.ViewModels;
 
 namespace MeetUp.Services
 {
     public class UserService : IUserService
     {
         public readonly IUserRepository repo;
-        public UserService(IUserRepository userRepository)
+        public readonly IRatingRepository ratingRepository;
+        public readonly IUserActivityRepository activityRepository;
+        public UserService(IUserRepository userRepository, IRatingRepository ratingRepository, IUserActivityRepository activityRepository)
         {
             repo = userRepository;
+            this.ratingRepository = ratingRepository;
+            this.activityRepository = activityRepository;
         }
         public bool Add(AppUser user)
         {
@@ -28,6 +33,15 @@ namespace MeetUp.Services
         public Task<AppUser> GetById(string id)
         {
             return repo.GetById(id);
+        }
+
+        public async Task<UserDetailsViewModel> GetUserDetails(string id)
+        {
+            AppUser user = await repo.GetById(id);
+            ICollection<Rating> ratings = await ratingRepository.GetRatingByUserId(id);
+            ICollection<UserActivity> userActivities = await activityRepository.GetActivitiesByUserId(id);
+
+            return new UserDetailsViewModel(ratings, userActivities, user);
         }
 
         public bool Update(AppUser user)

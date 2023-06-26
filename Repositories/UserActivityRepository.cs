@@ -57,5 +57,10 @@ namespace MeetUp.Repositories
             _context.Update(userActivity);
             return Save();
         }
+        public async Task<ICollection<UserActivity>> GetActivitiesByUserId(string id)
+        {
+        return await _context.UserActivity.Include(ua => ua.Activity).Where(ua => ua.UserId == id).ToListAsync();
+        }
     }
 }
+    

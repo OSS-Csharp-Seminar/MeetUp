@@ -14,7 +14,10 @@ namespace MeetUp.Repositories
         }
         public bool Add(Rating rating)
         {
-            throw new NotImplementedException();
+            _context.Add(rating);
+            return Save();
+                
+
         }
 
         public bool Delete(Rating rating)
@@ -43,6 +46,10 @@ namespace MeetUp.Repositories
         {
             _context.Update(rating);
             return Save();
+        }
+        public async Task<ICollection<Rating>> GetRatingByUserId(string id) 
+        {
+            return await _context.Rating.Where(r => r.RevieweeId == id).ToListAsync();
         }
     }
 }

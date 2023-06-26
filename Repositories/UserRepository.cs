@@ -12,7 +12,8 @@ namespace MeetUp.Repositories
         {
             _context = context;
         }
-        public async Task<ICollection<AppUser>> GetAll() {
+        public async Task<ICollection<AppUser>> GetAll()
+        {
             return await _context.User.ToListAsync();
         }
         public bool Add(AppUser user)
@@ -25,7 +26,7 @@ namespace MeetUp.Repositories
             _context.Update(user);
             return Save();
         }
-      
+
         public bool Save()
         {
             var saved = _context.SaveChanges();
