@@ -34,6 +34,10 @@ namespace MeetUp.Models
             CategoryId = categoryId;
             AppUserId = appUserId;
         }
-        
+        public MeetActivity()
+        {
+            
+        }
+
     }
 }

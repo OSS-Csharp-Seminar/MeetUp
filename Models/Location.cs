@@ -16,6 +16,10 @@ namespace MeetUp.Models
             Latitude = latitude;
             City = city;
         }
+        public Location()
+        {
+            
+        }
     }
     
     
