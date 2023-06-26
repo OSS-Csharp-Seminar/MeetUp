@@ -12,10 +12,11 @@ namespace MeetUp.Repositories
         {
             _context = context;
         }
-        public bool Add(MeetActivity meetActivity)
+        public MeetActivity Add(MeetActivity meetActivity)
         {
-            _context.Add(meetActivity);
-            return Save();
+            var saved = _context.Add(meetActivity).Entity;
+            Save();
+            return saved;
         }
 
         public bool Delete(MeetActivity meetActivity)

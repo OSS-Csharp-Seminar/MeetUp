@@ -10,8 +10,18 @@
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/MeetActivity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/MeetActivity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/IMeetActivityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IMeetActivityRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IMeetActivityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/IUserActivityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/IUserActivityRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositories/MeetActivityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/MeetActivityRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositories/UserActivityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/UserActivityRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/MeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/MeetActivityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/UserActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/UserActivityService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/ViewModels/MeetActivityViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/UserActivities/Owned.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/UserActivities/Owned.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,23 +31,29 @@
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="main" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1b14b1c776b364cbfb12c1859d42c2378dffbb74157c9f2c3e635395ff233/ExceptionContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/1e8feaadf5c3fa14d36ea2a638c432a2e1a47b7837d8b83d88303c5d9c15cf/AsyncValueTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2e175135818cfaa43219c305447e9253bdb14d04c54ddbde459f2779aea1b0/IRoleStore.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37a954845b52703c5cce1aacf8fa1292378878e82bf68c4c4b5effc447316e9/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4ea681aa1df24442c1a5e1e18582b1a2d29ac5bfd41390c94a5d2cc958b5ff/UserManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/6f014f3450cd40ef82e4f71146a47afd19ff3c53e3b5182cd307757bf7763/ModelStateDictionary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/7d9a41d47547e1fe7fe548b21ab4de12cc2671170a023bc8c629017837eb5f4/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/acf1b6abd0c65bfb4dd378fac91ee884d46073faa6295340469651abdca69/PageModel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b1d8ea2ef040e2f7d271df55c8ab95864363cad768f2153833f8ba6c43aaa/IEmailSender.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b3b9e299891b4a5e01aa09765d36eefe19ff191ead020be8e6a44386f607971/ValidateAntiForgeryTokenAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b9139e63615f434419f750917a67741a77467f1f478dcf836ddd3c78b8d837d/RoleManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c6354d55b4c1fdbe22621ea48185af62cdeadcf4f28d9ed0890dfdf36c6/ControllerBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d555b6bc78df652895d9bf368762f415ad13deb21ca2dc977dd48593f46e2/RazorPageBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f324c62785677b53e916aa9084ae54a42014c79d132908ae191cf8e3af4cfb/File.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/ImageController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/ImageController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/MeetActivitiesController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Controllers/AccountController.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/Bartul/Documents/git/MeetUp/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -114,6 +130,7 @@
       <updated>1687626030842</updated>
       <workItem from="1687626032310" duration="1467000" />
       <workItem from="1687691418139" duration="2077000" />
+      <workItem from="1687781154030" duration="6062000" />
     </task>
     <servers />
   </component>
@@ -134,5 +151,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Services/MeetActivityService.cs</url>
+          <line>67</line>
+          <properties documentPath="C:\Users\Bartul\Documents\git\MeetUp\Services\MeetActivityService.cs" initialLine="66" containingFunctionPresentation="Method 'canJoin'">
+            <startOffsets>
+              <option value="2183" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2195" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

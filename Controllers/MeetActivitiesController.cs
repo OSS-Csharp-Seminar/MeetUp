@@ -12,12 +12,14 @@ namespace MeetUp.Controllers
         private readonly IMeetActivityService service;
         private readonly ICategoryService categoryService;
         private readonly ILocationService locationService;
+        private readonly IUserActivityService userActivityService;
 
-        public MeetActivitiesController(IMeetActivityService _service, ICategoryService _categoryService, ILocationService _locationService)
+        public MeetActivitiesController(IMeetActivityService _service, ICategoryService _categoryService, ILocationService _locationService, IUserActivityService _userActivityService)
         {
             service = _service;
             categoryService = _categoryService;
             locationService = _locationService;
+            userActivityService = _userActivityService;
         }
 
         // GET: MeetActivities
@@ -34,13 +36,18 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
 
+            // TODO: Move to service layer GetViewModel
             var meetActivity = service.GetById(id.Value).Result;
+            var meetActivityViewModel = new MeetActivityViewModel();
+            meetActivityViewModel.meetActivity = meetActivity;
+            meetActivityViewModel.members=userActivityService.GetUsersByActivityId(meetActivity.Id).Result;
+            meetActivityViewModel.canJoin = service.canJoin(meetActivity.Id, User.Identity.GetUserId(), User.Identity.IsAuthenticated);
+                
             if (meetActivity == null)
             {
                 return NotFound();
             }
-
-            return View(meetActivity);
+            return View(meetActivityViewModel);
         }
 
         public IActionResult Create()
@@ -51,13 +58,12 @@ namespace MeetUp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(MeetActivityViewModel meetActivity)
+        public async Task<IActionResult> Create(MeetActivityCreateModel meetActivity)
         {
             var errors = service.Validate(meetActivity);
             if (errors.Length == 0)
             {
-                meetActivity.AppUserId = User.Identity.GetUserId();
-                service.Add(meetActivity);
+                service.Add(meetActivity, User.Identity.GetUserId());
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");

@@ -35,6 +35,22 @@ namespace MeetUp.Repositories
             return await _context.UserActivity.Include(ua => ua.User).Include(ua=>ua.Activity).ToListAsync();
         }
 
+        public async Task<ICollection<AppUser>> GetUsersByActivityId(int activityId)
+        {
+            return await _context.UserActivity.Where(userActivity => userActivity.ActivityId == activityId)
+                .Select(userActivity => userActivity.User).ToListAsync();
+        }
+        
+        public async Task<UserActivity> GetByUserAndActivity(string userId, int activityId)
+        {
+            return await _context.UserActivity.Where(userActivity => userActivity.ActivityId == activityId && userActivity.UserId == userId).FirstOrDefaultAsync();
+        }
+        
+        public async Task<ICollection<UserActivity>> GetByActivityOwner(string userId)
+        {
+            return await _context.UserActivity.Include(ua => ua.User).Include(ua=>ua.Activity).Where(userActivity => userActivity.Activity.AppUserId == userId && userActivity.UserId != userId).ToListAsync();
+        }
+
         public async Task<UserActivity> GetById(int id)
         {
             return await _context.UserActivity.Include(ua => ua.User).Include(ua => ua.Activity).FirstOrDefaultAsync(ua => ua.Id == id);

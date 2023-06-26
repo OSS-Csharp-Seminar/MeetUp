@@ -6,7 +6,7 @@ namespace MeetUp.Interfaces
     {
         Task<ICollection<MeetActivity>> GetAll();
         Task<MeetActivity> GetById(int id);
-        bool Add(MeetActivity meetActivity);
+        MeetActivity Add(MeetActivity meetActivity);
         bool Update(MeetActivity meetActivity);
         bool Delete(MeetActivity meetActivity);
         bool Save();

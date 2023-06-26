@@ -13,5 +13,6 @@ namespace MeetUp.Models
         [ForeignKey("MeetActivity")]
         public int ActivityId { get; set; }
         public MeetActivity Activity { get; set; }
+        public bool Approved { get; set; }
     }
 }

@@ -6,14 +6,15 @@ namespace MeetUp.ViewModels
     {
         public AppUser User{ get; set; }
         public ICollection<Rating> Ratings { get; set; }
+
         public ICollection<UserActivity> UserActivities { get; set; }
         public double AverageScore { get; set; }
+
         public UserDetailsViewModel(ICollection<Rating> ratings, ICollection<UserActivity> userActivities, AppUser user)
         {
             Ratings = ratings;
             UserActivities = userActivities;
             User = user;
-
         }
         public void CalculateAverageScore()
         {
@@ -24,6 +25,7 @@ namespace MeetUp.ViewModels
             }
            
             AverageScore =  sum / Ratings.Count;
+
         }
 
     }
