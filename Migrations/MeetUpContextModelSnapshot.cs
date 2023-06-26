@@ -136,6 +136,7 @@ namespace MeetUp.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Capacity")
@@ -156,7 +157,6 @@ namespace MeetUp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Picture")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<DateTime>("Time")
@@ -185,10 +185,8 @@ namespace MeetUp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RevieweeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RevieweeId1")
+                    b.Property<string>("RevieweeId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Score")
@@ -196,7 +194,7 @@ namespace MeetUp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RevieweeId1");
+                    b.HasIndex("RevieweeId");
 
                     b.ToTable("Rating");
                 });
@@ -305,12 +303,10 @@ namespace MeetUp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -347,12 +343,10 @@ namespace MeetUp.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -366,7 +360,9 @@ namespace MeetUp.Migrations
                 {
                     b.HasOne("MeetUp.Models.AppUser", null)
                         .WithMany("MyActivities")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("MeetUp.Models.Category", "Category")
                         .WithMany()
@@ -389,7 +385,9 @@ namespace MeetUp.Migrations
                 {
                     b.HasOne("MeetUp.Models.AppUser", "Reviewee")
                         .WithMany("Ratings")
-                        .HasForeignKey("RevieweeId1");
+                        .HasForeignKey("RevieweeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Reviewee");
                 });
