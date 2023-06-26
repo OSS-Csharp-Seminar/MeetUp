@@ -1,4 +1,5 @@
 ﻿using MeetUp.Interfaces;
+using MeetUp.Models;
 using MeetUp.ViewModels;
 
 namespace MeetUp.Services
@@ -6,14 +7,25 @@ namespace MeetUp.Services
     public class MeetActivityService :IMeetActivityService
     {
         private readonly IMeetActivityRepository repo;
-        public MeetActivityService(IMeetActivityRepository meetActivityRepository)
+        private readonly IUserActivityService userActivityService;
+        private readonly IUserService userService;
+        public MeetActivityService(IMeetActivityRepository meetActivityRepository, IUserActivityService userActivityService, IUserService userService)
         {
             repo = meetActivityRepository;
+            this.userActivityService = userActivityService;
+            this.userService = userService;
         }
 
-        public bool Add(MeetActivityCreateModel meetActivity)
+        public bool Add(MeetActivityCreateModel meetActivity, string userId)
         {
-            return repo.Add(MeetActivityCreateModel.To(meetActivity));  
+            meetActivity.AppUserId = userId;
+            var created = repo.Add(MeetActivityCreateModel.To(meetActivity));
+            if (created != null)
+            {
+                userActivityService.Add(userId, created.Id);
+                return true;
+            }
+            return false;
         }
 
         public bool Delete(Models.MeetActivity meetActivity)
@@ -44,6 +56,19 @@ namespace MeetUp.Services
             }
 
             return "";
+        }
+
+        public bool canJoin(int activityId, string userId, bool isAuthenticated)
+        {
+            var members = userActivityService.GetUsersByActivityId(activityId).Result;
+            if ((!members.Contains(userService.GetById(userId).Result))
+                && GetById(activityId).Result.Capacity > members.Count
+                && (isAuthenticated))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

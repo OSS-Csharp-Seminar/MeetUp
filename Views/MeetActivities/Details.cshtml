@@ -44,7 +44,7 @@
                 @item.Email
             </dd>
         }
-        @if ((@Model.meetActivity.Capacity > @Model.members.Count) && (User.Identity.IsAuthenticated))
+        @if (@Model.canJoin)
         {
             <dd>
                 <form action="@Url.Action("Create", "userActivities", new { activityId = Model.meetActivity.Id })" method="post">

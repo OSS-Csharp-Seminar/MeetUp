@@ -36,10 +36,13 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
 
+            // TODO: Move to service layer GetViewModel
             var meetActivity = service.GetById(id.Value).Result;
             var meetActivityViewModel = new MeetActivityViewModel();
             meetActivityViewModel.meetActivity = meetActivity;
             meetActivityViewModel.members=userActivityService.GetUsersByActivityId(meetActivity.Id).Result;
+            meetActivityViewModel.canJoin = service.canJoin(meetActivity.Id, User.Identity.GetUserId(), User.Identity.IsAuthenticated);
+                
             if (meetActivity == null)
             {
                 return NotFound();
@@ -60,8 +63,7 @@ namespace MeetUp.Controllers
             var errors = service.Validate(meetActivity);
             if (errors.Length == 0)
             {
-                meetActivity.AppUserId = User.Identity.GetUserId();
-                service.Add(meetActivity);
+                service.Add(meetActivity, User.Identity.GetUserId());
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");

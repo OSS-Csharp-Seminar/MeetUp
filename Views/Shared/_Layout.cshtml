@@ -22,6 +22,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="MeetActivities" asp-action="Index">Home</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="UserActivities" asp-action="Owned">Applications</a>
+                            </li>
+                        }
                        
                         @if (User.IsInRole("admin"))
                         {

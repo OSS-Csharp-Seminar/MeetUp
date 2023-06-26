@@ -8,12 +8,10 @@ namespace MeetUp.Services
     {
         private readonly IUserActivityRepository repo;
         private readonly IUserService userService;
-        private readonly IMeetActivityService meetActivityService;
         
-        public UserActivityService(IUserActivityRepository userActivityRepository, IMeetActivityService meetActivityService, IUserService userService)
+        public UserActivityService(IUserActivityRepository userActivityRepository, IUserService userService)
         {
             repo = userActivityRepository;
-            this.meetActivityService = meetActivityService;
             this.userService = userService;
         }
 
@@ -24,16 +22,8 @@ namespace MeetUp.Services
 
         public async Task<ICollection<UserActivity>> GetByActivityOwner(string userId)
         {
-            var userActivities = repo.GetAll().Result;
-            foreach (UserActivity userActivity in userActivities)
-            {
-                if (userActivity.Activity.AppUserId != userId)
-                {
-                    userActivities.Remove(userActivity);
-                }
-            }
-
-            return userActivities;
+            return await repo.GetByActivityOwner(userId);
+            
         }
 
         public void Approve(string userId, int activityId)
@@ -48,12 +38,7 @@ namespace MeetUp.Services
             var userActivity = new UserActivity();
             userActivity.UserId = userId;
             userActivity.ActivityId = activityId;
-            if (!GetUsersByActivityId(activityId).Result.Contains(userService.GetById(userId).Result))
-            {
-                return repo.Add(userActivity);
-            }
-
-            return false;
+            return repo.Add(userActivity);
         }
 
         public bool Delete(UserActivity userActivity)
