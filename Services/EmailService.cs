@@ -16,11 +16,11 @@ namespace MeetUp.Services
             {
                 EnableSsl = true,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(senderEmail, password)
+                Credentials = new NetworkCredential("meetupmailer67@gmail.com", "Meetupmailer#")
             };
 
             return client.SendMailAsync(
-                new MailMessage(from: senderEmail,
+                new MailMessage(from: "meetupmailer67@gmail.com",
                                 to: emailMessage.Email,
                                 emailMessage.Subject,
                                 emailMessage.Message

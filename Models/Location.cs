@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MeetUp.Models
 {
@@ -6,14 +7,15 @@ namespace MeetUp.Models
     {
         [Key]
         public int Id { get; set; }
-        public decimal Longitude { get; set; }
-        public decimal Latitude { get; set; }
-        public string City { get; set; }
+        public string Address { get; set; }
+        [ForeignKey("City")]
+        public int CityId { get; set; }
+        public City City { get; set; }
         
-        public Location(decimal longitude, decimal latitude, string city)
+        public Location(string address, City city)
         {
-            Longitude = longitude;
-            Latitude = latitude;
+            Address = address;
+            CityId = city.Id;
             City = city;
         }
         public Location()
