@@ -15,9 +15,20 @@ namespace MeetUp.Services
             this.userService = userService;
         }
 
-        public Task<ICollection<AppUser>> GetUsersByActivityId(int activityId)
+        public Task<ICollection<AppUser>> ApprovedUsers(int activityId)
         {
-            return repo.GetUsersByActivityId(activityId);
+            return repo.ApprovedUsers(activityId);
+        }
+
+        public bool isSubscribed(int activityId, string userId)
+        {
+            var userActivity = repo.GetByUserAndActivity(userId, activityId).Result;
+            if (userActivity != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public async Task<ICollection<UserActivity>> GetByActivityOwner(string userId)
@@ -38,6 +49,7 @@ namespace MeetUp.Services
             var userActivity = new UserActivity();
             userActivity.UserId = userId;
             userActivity.ActivityId = activityId;
+            userActivity.Approved = true;
             return repo.Add(userActivity);
         }
 

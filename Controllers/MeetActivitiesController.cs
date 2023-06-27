@@ -38,7 +38,7 @@ namespace MeetUp.Controllers
             var meetActivity = service.GetById(id.Value).Result;
             var meetActivityViewModel = new MeetActivityViewModel();
             meetActivityViewModel.meetActivity = meetActivity;
-            meetActivityViewModel.members = userActivityService.GetUsersByActivityId(meetActivity.Id).Result;
+            meetActivityViewModel.members = userActivityService.ApprovedUsers(meetActivity.Id).Result;
             meetActivityViewModel.canJoin = service.canJoin(meetActivity.Id, User.Identity.GetUserId(), User.Identity.IsAuthenticated);
             meetActivityViewModel.canEdit = service.canEdit(meetActivity.Id, User.Identity.GetUserId());
 

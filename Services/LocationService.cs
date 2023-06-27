@@ -30,6 +30,11 @@ namespace MeetUp.Services
         {
             return repo.GetById(id);
         }
+        
+        public Task<Location> GetByAddressAndCityId(string address, int cityId)
+        {
+            return repo.GetByAddressAndCityId(address, cityId);
+        }
 
         public bool Update(Location location)
         {

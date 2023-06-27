@@ -11,7 +11,7 @@ namespace MeetUp.Interfaces
         bool Update(MeetActivityEditModel meetActivity);
         bool Delete(MeetActivity meetActivity);
         String ValidateDate(DateTime activityTime);
-        bool canJoin(int activityId, string userId, bool isAuthenticated);
+        canJoin canJoin(int activityId, string userId, bool isAuthenticated);
         bool canEdit(int activityId, string userId);
     }
 }

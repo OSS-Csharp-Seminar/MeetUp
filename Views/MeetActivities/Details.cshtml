@@ -6,47 +6,62 @@
 
 <h1>@Model.meetActivity.Name</h1>
 
-<div>
-    <h4>@Model.meetActivity.Time</h4>
-    <hr />
-    <dl class="row">
-        @if (Model.meetActivity.Picture != null){
-            <img src='@Url.Action("Show", "image", new { activityId = Model.meetActivity.Id })'/>
-        }
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.meetActivity.Description)
-        </dd>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.meetActivity.Capacity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayFor(model => model.meetActivity.Location.City)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.meetActivity.Category)
-        </dd>
-        <h2>Members</h2>
-        @foreach (var item in @Model.members)
-        {
-            <dd class="col-sm-10">
-                @item.Email
-            </dd>
-        }
-        @if (@Model.canJoin)
-        {
-            <dd>
-                <form action="@Url.Action("Create", "userActivities", new { activityId = Model.meetActivity.Id })" method="post">
-                    <button type="submit">Join</button>
-                </form>
-            </dd>
-        }
-    </dl>
-    
-</div>
-<div>
-    @if (@Model.canEdit)
-    {
-        <a asp-action="Edit" asp-route-id="@Model?.meetActivity.Id">Edit</a>
-    }
-    <a asp-action="Index">Back to List</a>
+<link rel="stylesheet" href="css/details.css" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="project-info-box mt-0">
+                <h5>DESCRIPTION</h5>
+                <p class="mb-0">@Model.meetActivity.Description</p>
+            </div><!-- / project-info-box -->
+
+            <div class="project-info-box">
+                <p><b>Creator:</b> @Model.meetActivity.Owner.UserName</p>
+                <p><b>Date:</b> @Model.meetActivity.Time</p>
+                @if(@Model.canJoin == canJoin.APPROVED){
+                <p><b>Address:</b> @Model.meetActivity.Location.Address, @Model.meetActivity.Location.City.Name</p>
+                <p><b>Approved Members:</b></p>
+                @if(@Model.members.Count > 0){
+                    @foreach (var item in @Model.members)
+                {
+                    <p>
+                        @item.UserName
+                    </p>
+                }
+                }else
+                    {
+                        <p>No members yet.</p>
+                    }
+                }
+                </div><!-- / project-info-box -->
+            
+            @if (@Model.canJoin == canJoin.TRUE)
+                    {
+                        <div>
+                            <form action="@Url.Action("Create", "userActivities", new { activityId = Model.meetActivity.Id })" method="post">
+                                <button type="submit">Join</button>
+                            </form>
+                        </div>
+                    }else if(@Model.canJoin == canJoin.PENDING){
+                        <p>Waiting for approval.</p>
+            }else if(@Model.canJoin == canJoin.APPROVED){
+                                     <p>You are approved.</p>
+                         }
+            
+            <div>
+                        @if (@Model.canEdit)
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model?.meetActivity.Id">Edit</a>
+                        }
+                        <a asp-action="Index">Back to List</a>
+                    </div>
+        </div><!-- / column -->
+
+        <div class="col-md-7">
+            @if (Model.meetActivity.Picture != null)
+            {
+                <img src='@Url.Action("Show", "image", new { activityId = Model.meetActivity.Id })' style="max-height : 600px;max-width : 1000px;" class="rounded">
+            }
+        </div><!-- / column -->
+    </div>
 </div>

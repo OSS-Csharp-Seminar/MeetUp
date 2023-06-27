@@ -34,6 +34,10 @@ namespace MeetUp.Repositories
         {
             return await _context.Location.Include(l => l.City).FirstOrDefaultAsync();
         }
+        
+        public async Task<Location> GetByAddressAndCityId(string address, int cityId){
+            return await _context.Location.Where(l => l.Address == address && l.CityId == cityId).FirstOrDefaultAsync();
+        }
 
         public bool Save()
         {
