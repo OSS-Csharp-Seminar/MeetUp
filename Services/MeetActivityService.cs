@@ -22,7 +22,7 @@ namespace MeetUp.Services
         public bool Add(MeetActivityCreateModel meetActivity, string userId)
         {
             meetActivity.AppUserId = userId;
-            var location = locationService.Add(new Location(meetActivity.Address, cityService.GetById(meetActivity.CityId).Result));
+            var location = locationService.Add(new Location(meetActivity.Address, meetActivity.CityId));
             var created = repo.Add(MeetActivityCreateModel.To(meetActivity, location.Id));
             if (created != null)
             {

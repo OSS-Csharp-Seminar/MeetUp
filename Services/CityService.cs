@@ -20,4 +20,9 @@ public class CityService : ICityService
     {
         return repo.GetById(id);
     }
+    
+    public bool Add(City city)
+    {
+        return repo.Add(city);
+    }
 }

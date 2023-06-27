@@ -61,6 +61,7 @@ var app = builder.Build();
 if (args.Length == 1 && args[0].ToLower() == "seeddata")
 {
     await Seed.SeedUsersAndRolesAsync(app);
+    await Seed.SeedCities(app);
     await Seed.SeedLocations(app);
     await Seed.SeedCategories(app);
     //Seed.SeedData(app);

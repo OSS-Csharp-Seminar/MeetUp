@@ -23,4 +23,16 @@ public class CityRepository : ICityRepository
     {
         return await _context.City.FirstOrDefaultAsync();
     }
+    
+    public bool Add(City city)
+    {
+        _context.Add(city);
+        return Save();
+    }
+    
+    public bool Save()
+    {
+        var saved = _context.SaveChanges();
+        return saved > 0;
+    }
 }

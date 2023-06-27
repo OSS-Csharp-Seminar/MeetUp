@@ -9,13 +9,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Interfaces/ICityRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Interfaces/ICityService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Repositories/CityRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Services/CityService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/MeetUpContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/MeetUpContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MeetUp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MeetUp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data/Seed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Seed.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/ICityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/ICityRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Interfaces/ICityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Interfaces/ICityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/Location.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Location.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositories/CityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/CityRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/CityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/CityService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/MeetActivityService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Services/MeetActivityService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,10 +157,10 @@
           <line>71</line>
           <properties documentPath="C:\Users\Bartul\Documents\git\MeetUp\Services\MeetActivityService.cs" initialLine="66" containingFunctionPresentation="Method 'canJoin'">
             <startOffsets>
-              <option value="2389" />
+              <option value="2361" />
             </startOffsets>
             <endOffsets>
-              <option value="2401" />
+              <option value="2373" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />

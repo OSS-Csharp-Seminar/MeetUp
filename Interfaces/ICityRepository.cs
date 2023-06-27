@@ -7,5 +7,6 @@ namespace MeetUp.Interfaces
         {
                 Task<ICollection<City>> GetAll();
                 Task<City> GetById(int id);
+                bool Add(City city);
         }
 }
