@@ -13,26 +13,14 @@
         @if (Model.meetActivity.Picture != null){
             <img src='@Url.Action("Show", "image", new { activityId = Model.meetActivity.Id })'/>
         }
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.meetActivity.Description)
-        </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.meetActivity.Description)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.meetActivity.Capacity)
-        </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.meetActivity.Capacity)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.meetActivity.Location.City)
-        </dt>
         <dt class="col-sm-2">
             @Html.DisplayFor(model => model.meetActivity.Location.City)
-        </dt>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.meetActivity.Category)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.meetActivity.Category)

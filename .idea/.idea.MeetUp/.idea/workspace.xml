@@ -10,7 +10,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7f5589ab-7160-4024-b055-32d7fd841e07" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MeetUp/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Repositories/LocationRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/LocationRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/MeetActivitiesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/UserActivitiesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/UserActivitiesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Repositories/MeetActivityRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Repositories/MeetActivityRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Views/MeetActivities/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/MeetActivities/Details.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -151,13 +153,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Controllers/MeetActivitiesController.cs</url>
-          <line>42</line>
+          <line>38</line>
           <properties documentPath="C:\Users\Bartul\Documents\git\MeetUp\Controllers\MeetActivitiesController.cs" initialLine="42" containingFunctionPresentation="Method 'Details'">
             <startOffsets>
-              <option value="1452" />
+              <option value="1330" />
             </startOffsets>
             <endOffsets>
-              <option value="1508" />
+              <option value="1386" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="5" />

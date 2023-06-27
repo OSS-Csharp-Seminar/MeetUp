@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using MeetUp.Data;
 using MeetUp.Models;
 using MeetUp.Interfaces;
 using Microsoft.AspNet.Identity;
-using MeetUp.Services;
 
 namespace MeetUp.Controllers
 {
@@ -37,7 +31,7 @@ namespace MeetUp.Controllers
         public async Task<IActionResult> Owned()
         {
             var userActivities = await service.GetByActivityOwner(User.Identity.GetUserId());
-            return View(Approve);
+            return View(userActivities);
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -71,9 +65,9 @@ namespace MeetUp.Controllers
             var activity = meetActivityService.GetById(activityId).Result;
             EmailMessage message = new();
             message.GenerateNotifyAcitivtyOwner(activity.Owner.Email, activity);
-            await emailService.SendEmailAsync(message);
+            //await emailService.SendEmailAsync(message);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Details), "MeetActivities", new { id = activityId });
         }
 
         public async Task<IActionResult> Edit(int? id)
