@@ -10,6 +10,7 @@ namespace MeetUp.Services
         private readonly IMeetActivityRepository repo;
         private readonly IUserActivityService userActivityService;
         private readonly IUserService userService;
+        private readonly ILocationService locationService;
         public MeetActivityService(IMeetActivityRepository meetActivityRepository, IUserActivityService userActivityService, IUserService userService)
         {
             repo = meetActivityRepository;
@@ -20,7 +21,8 @@ namespace MeetUp.Services
         public bool Add(MeetActivityCreateModel meetActivity, string userId)
         {
             meetActivity.AppUserId = userId;
-            var created = repo.Add(MeetActivityCreateModel.To(meetActivity));
+            var location = locationService.Add(new Location(meetActivity.Address, meetActivity.CityId));
+            var created = repo.Add(MeetActivityCreateModel.To(meetActivity, location.Id));
             if (created != null)
             {
                 userActivityService.Add(userId, created.Id);

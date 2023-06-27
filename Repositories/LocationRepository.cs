@@ -12,10 +12,11 @@ namespace MeetUp.Repositories
         {
             _context = context;
         }
-        public bool Add(Location location)
+        public Location Add(Location location)
         {
-            _context.Add(location);
-            return Save();
+            var created = _context.Add(location).Entity;
+            Save();
+            return created;
         }
 
         public bool Delete(Location location)
