@@ -62,9 +62,9 @@ namespace MeetUp.Data
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var cityRepository = serviceScope.ServiceProvider.GetRequiredService<ICityRepository>();
-                cityRepository.Add(new City(1,"Split"));
-                cityRepository.Add(new City(2, "Omis"));
-                cityRepository.Add(new City(3, "Makarska"));
+                cityRepository.Add(new City("Split"));
+                cityRepository.Add(new City("Omis"));
+                cityRepository.Add(new City("Makarska"));
             }
         }
 

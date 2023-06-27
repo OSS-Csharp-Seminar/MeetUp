@@ -30,13 +30,13 @@ builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<IMeetActivityRepository, MeetActivityRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUserActivityRepository, UserActivityRepository>();
+builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddScoped<IMeetActivityService, MeetActivityService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IUserActivityService, UserActivityService>();
-builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddHttpContextAccessor();
 
