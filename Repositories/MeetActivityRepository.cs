@@ -32,7 +32,12 @@ namespace MeetUp.Repositories
 
         public async Task<MeetActivity> GetById(int id)
         {
-            return await _context.MeetActivity.Include(ma=> ma.Owner).Include(ma => ma.Category).Include(ma => ma.Location).FirstOrDefaultAsync(ma => ma.Id == id);
+            return await _context.MeetActivity
+                .Include(ma=> ma.Owner)
+                .Include(ma => ma.Category)
+                .Include(ma => ma.Location)
+                .Include(ma => ma.Location.City)
+                .FirstOrDefaultAsync(ma => ma.Id == id);
         }
 
         public bool Save()
