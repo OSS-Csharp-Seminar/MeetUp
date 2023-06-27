@@ -16,14 +16,14 @@ namespace MeetUp.Controllers
     {
         private readonly IMeetActivityService service;
         private readonly ICategoryService categoryService;
-        private readonly ILocationService locationService;
+        private readonly ICityService cityService;
         private readonly IUserActivityService userActivityService;
 
-        public MeetActivitiesController(IMeetActivityService _service, ICategoryService _categoryService, ILocationService _locationService, IUserActivityService _userActivityService)
+        public MeetActivitiesController(IMeetActivityService _service, ICategoryService _categoryService, ICityService _cityService, IUserActivityService _userActivityService)
         {
             service = _service;
             categoryService = _categoryService;
-            locationService = _locationService;
+            cityService = _cityService;
             userActivityService = _userActivityService;
         }
 
@@ -55,7 +55,7 @@ namespace MeetUp.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Name");
-            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id");
+            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Name");
             return View();
         }
         [Authorize]
@@ -68,8 +68,8 @@ namespace MeetUp.Controllers
                 service.Add(meetActivity, User.Identity.GetUserId());
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");
-            ViewData["CityId"] = new SelectList(locationService.GetAll().Result, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Name");
+            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Name");
             ViewData["Errors"] = errors;
             return View(meetActivity);
         }
@@ -87,7 +87,7 @@ namespace MeetUp.Controllers
                 return NotFound();
             }
             ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id", meetActivity.CategoryId);
-            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id", meetActivity.LocationId);
+            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Id", meetActivity.LocationId);
             return View(meetActivity);
         }
 
@@ -108,7 +108,7 @@ namespace MeetUp.Controllers
 
 
             ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id", meetActivity.CategoryId);
-            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id", meetActivity.LocationId);
+            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Name", meetActivity.LocationId);
             return View(meetActivity);
         }
 

@@ -12,11 +12,12 @@ namespace MeetUp.Services
         private readonly IUserService userService;
         private readonly ILocationService locationService;
         private readonly ICityService cityService;
-        public MeetActivityService(IMeetActivityRepository meetActivityRepository, IUserActivityService userActivityService, IUserService userService)
+        public MeetActivityService(IMeetActivityRepository meetActivityRepository, IUserActivityService userActivityService, IUserService userService, ILocationService locationService)
         {
             repo = meetActivityRepository;
             this.userActivityService = userActivityService;
             this.userService = userService;
+            this.locationService = locationService;
         }
 
         public bool Add(MeetActivityCreateModel meetActivity, string userId)
