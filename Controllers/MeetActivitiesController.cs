@@ -40,6 +40,7 @@ namespace MeetUp.Controllers
             meetActivityViewModel.meetActivity = meetActivity;
             meetActivityViewModel.members = userActivityService.GetUsersByActivityId(meetActivity.Id).Result;
             meetActivityViewModel.canJoin = service.canJoin(meetActivity.Id, User.Identity.GetUserId(), User.Identity.IsAuthenticated);
+            meetActivityViewModel.canEdit = service.canEdit(meetActivity.Id, User.Identity.GetUserId());
 
             if (meetActivity == null)
             {
@@ -58,7 +59,7 @@ namespace MeetUp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(MeetActivityCreateModel meetActivity)
         {
-            var errors = service.Validate(meetActivity);
+            var errors = service.ValidateDate(meetActivity.Time);
             if (errors.Length == 0)
             {
                 service.Add(meetActivity, User.Identity.GetUserId());
@@ -82,29 +83,28 @@ namespace MeetUp.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id", meetActivity.CategoryId);
-            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Id", meetActivity.LocationId);
-            return View(meetActivity);
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Name", meetActivity.CategoryId);
+            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Name", meetActivity.LocationId);
+            return View(new MeetActivityEditModel(meetActivity));
         }
 
         [HttpPost]
         [Authorize]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Time,Capacity,Picture,LocationId,CategoryId")] MeetActivity meetActivity)
+        public async Task<IActionResult> Edit(int id, MeetActivityEditModel meetActivity)
         {
             if (id != meetActivity.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            { 
+            var errors = service.ValidateDate(meetActivity.Time);
+            if (errors.Length == 0)
+            {
                 service.Update(meetActivity);
+                return RedirectToAction(nameof(Details), new {id = id});
             }
-
-
-            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id", meetActivity.CategoryId);
-            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Name", meetActivity.LocationId);
+            ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Name");
+            ViewData["CityId"] = new SelectList(cityService.GetAll().Result, "Id", "Name");
+            ViewData["Errors"] = errors;
             return View(meetActivity);
         }
 

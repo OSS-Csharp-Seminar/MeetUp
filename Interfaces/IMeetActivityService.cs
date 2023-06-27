@@ -8,9 +8,10 @@ namespace MeetUp.Interfaces
         Task<ICollection<MeetActivity>> GetAll();
         Task<MeetActivity> GetById(int id);
         bool Add(MeetActivityCreateModel meetActivity, string userId);
-        bool Update(MeetActivity meetActivity);
+        bool Update(MeetActivityEditModel meetActivity);
         bool Delete(MeetActivity meetActivity);
-        String Validate(MeetActivityCreateModel meetActivity);
+        String ValidateDate(DateTime activityTime);
         bool canJoin(int activityId, string userId, bool isAuthenticated);
+        bool canEdit(int activityId, string userId);
     }
 }
