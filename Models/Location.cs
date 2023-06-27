@@ -12,11 +12,10 @@ namespace MeetUp.Models
         public int CityId { get; set; }
         public City City { get; set; }
         
-        public Location(string address, City city)
+        public Location(string address, int cityId)
         {
             Address = address;
-            CityId = city.Id;
-            City = city;
+            CityId = cityId;
         }
         public Location()
         {

@@ -56,18 +56,29 @@ namespace MeetUp.Data
                 }
             }
         }
+        
+        public static async Task SeedCities(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var cityRepository = serviceScope.ServiceProvider.GetRequiredService<ICityRepository>();
+                cityRepository.Add(new City(1,"Split"));
+                cityRepository.Add(new City(2, "Omis"));
+                cityRepository.Add(new City(3, "Makarska"));
+            }
+        }
 
         public static async Task SeedLocations(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var locationRepository = serviceScope.ServiceProvider.GetRequiredService<ILocationRepository>();
-                locationRepository.Add(new Location("Ulica 1", new City(1,"Split")));
-                locationRepository.Add(new Location("Ulica 2", new City(2, "Omis")));
-                locationRepository.Add(new Location("Ulica 3", new City(3, "Makarska")));
+                locationRepository.Add(new Location("Ulica 1", 1));
+                locationRepository.Add(new Location("Ulica 2", 2));
+                locationRepository.Add(new Location("Ulica 3", 3));
             }
         }
-        
+
         public static async Task SeedCategories(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
