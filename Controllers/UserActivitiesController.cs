@@ -9,6 +9,7 @@ using MeetUp.Data;
 using MeetUp.Models;
 using MeetUp.Interfaces;
 using Microsoft.AspNet.Identity;
+using MeetUp.Services;
 
 namespace MeetUp.Controllers
 {
@@ -17,12 +18,14 @@ namespace MeetUp.Controllers
         private readonly IUserActivityService service;
         private readonly IUserService userService;
         private readonly IMeetActivityService meetActivityService;
+        private readonly IEmailService emailService;
 
-        public UserActivitiesController(IUserActivityService _service, IUserService _userService, IMeetActivityService _meetActivityService)
+        public UserActivitiesController(IUserActivityService _service, IUserService _userService, IMeetActivityService _meetActivityService, IEmailService _emailService)
         {
             service = _service;
             userService = _userService;
             meetActivityService = _meetActivityService;
+            emailService = _emailService;
         }
 
         public async Task<IActionResult> Index()
@@ -34,7 +37,7 @@ namespace MeetUp.Controllers
         public async Task<IActionResult> Owned()
         {
             var userActivities = await service.GetByActivityOwner(User.Identity.GetUserId());
-            return View(userActivities);
+            return View(Approve);
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -57,6 +60,7 @@ namespace MeetUp.Controllers
         public async Task<IActionResult> Approve(string userId, int activityId)
         {
             service.Approve(userId, activityId);
+
             return RedirectToAction(nameof(Owned));
         }
 
@@ -64,6 +68,11 @@ namespace MeetUp.Controllers
         public async Task<IActionResult> Create(int activityId)
         {
             service.Add(User.Identity.GetUserId(), activityId);
+            var activity = meetActivityService.GetById(activityId).Result;
+            EmailMessage message = new();
+            message.GenerateNotifyAcitivtyOwner(activity.Owner.Email, activity);
+            await emailService.SendEmailAsync(message);
+
             return RedirectToAction(nameof(Index));
         }
 
