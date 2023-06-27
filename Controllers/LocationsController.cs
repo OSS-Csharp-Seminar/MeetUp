@@ -28,15 +28,15 @@ namespace MeetUp.Controllers
                           View(locations) :
                           Problem("Entity set 'MeetUpContext.Location'  is null.");
         }
-
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var location = service.GetById(id.Value);
+            var location = await service.GetById(id);
             if (location == null)
             {
                 return NotFound();
@@ -62,15 +62,15 @@ namespace MeetUp.Controllers
             }
             return View(location);
         }
-        
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null )
             {
                 return NotFound();
             }
 
-            var location = service.GetById(id.Value);
+            var location = await service.GetById(id);
             if (location == null)
             {
                 return NotFound();
@@ -102,14 +102,15 @@ namespace MeetUp.Controllers
 
         // GET: Locations/Delete/5
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Delete(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null )
             {
                 return NotFound();
             }
 
-            var location = service.GetById(id.Value);
+            var location = await service.GetById(id);
             if (location == null)
             {
                 return NotFound();

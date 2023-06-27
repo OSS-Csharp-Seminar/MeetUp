@@ -12,6 +12,11 @@ namespace MeetUp.Models
         {
             Name = name;
         }
+        public Category()
+        {
+            
+
+        }
     }
 }
  

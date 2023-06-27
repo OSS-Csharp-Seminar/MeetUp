@@ -14,5 +14,6 @@ namespace MeetUp.Interfaces
         Task<ICollection<UserActivity>> GetActivitiesByUserId(string id);
         Task<UserActivity> GetByUserAndActivity(string userId, int activityId);
         Task<ICollection<UserActivity>> GetByActivityOwner(string userId);
+
     }
 }
