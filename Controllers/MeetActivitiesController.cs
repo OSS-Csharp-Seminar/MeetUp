@@ -67,7 +67,7 @@ namespace MeetUp.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Id");
-            ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id");
+            ViewData["CityId"] = new SelectList(locationService.GetAll().Result, "Id", "Name");
             ViewData["Errors"] = errors;
             return View(meetActivity);
         }

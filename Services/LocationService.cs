@@ -11,7 +11,7 @@ namespace MeetUp.Services
             repo = locationRepository;
         }
 
-        public bool Add(Location location)
+        public Location Add(Location location)
         {
             return repo.Add(location); 
         }

@@ -6,7 +6,7 @@ namespace MeetUp.Interfaces
     {
         Task<ICollection<Location>> GetAll();
         Task<Location> GetById(int id);
-        bool Add(Location location);
+        Location Add(Location location);
         bool Update(Location location);
         bool Delete(Location location);
     }
