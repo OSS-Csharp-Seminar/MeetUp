@@ -1,14 +1,10 @@
-﻿using MeetUp.Data;
-using MeetUp.Interfaces;
+﻿using MeetUp.Interfaces;
 using MeetUp.Models;
 using MeetUp.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using NuGet.Configuration;
-using System.Data;
 
 namespace MeetUp.Controllers
 {

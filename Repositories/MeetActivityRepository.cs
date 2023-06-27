@@ -36,7 +36,7 @@ namespace MeetUp.Repositories
                 .Include(ma=> ma.Owner)
                 .Include(ma => ma.Category)
                 .Include(ma => ma.Location)
-                .Include(ma => ma.Location.City)
+                .ThenInclude(l => l.City)
                 .FirstOrDefaultAsync(ma => ma.Id == id);
         }
 
