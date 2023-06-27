@@ -16,11 +16,11 @@
                 <div class="card" style="width: 18rem;">
                     @if (item.Picture == null)
                     {
-                        <img src='./placeholder.jpg'/>
+                        <img src='./placeholder.jpg' style="height: 250px; width: 286px;object-fit: cover"/>
                     }
                     else
                     {
-                        <img src='@Url.Action("Show", "image", new { activityId = item.Id })'/>
+                        <img src='@Url.Action("Show", "image", new { activityId = item.Id })' style="height: 250px; width: 286px; object-fit: cover"/>
                     }
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>

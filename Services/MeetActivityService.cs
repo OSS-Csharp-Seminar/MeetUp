@@ -52,7 +52,12 @@ namespace MeetUp.Services
         public bool Update(MeetActivityEditModel meetActivity)
         {
             //TODO: Doesn't have to create each time
-            var location = locationService.Add(new Location(meetActivity.Address, meetActivity.CityId));
+            var location = locationService.GetByAddressAndCityId(meetActivity.Address, meetActivity.CityId).Result;
+            if (location == null)
+            {
+                location = locationService.Add(new Location(meetActivity.Address, meetActivity.CityId));
+            }
+
             return repo.Update(MeetActivityEditModel.To(meetActivity, location.Id));   
         }
 
@@ -66,18 +71,28 @@ namespace MeetUp.Services
             return "";
         }
 
-        public  bool canJoin(int activityId, string userId, bool isAuthenticated)
+        public canJoin canJoin(int activityId, string userId, bool isAuthenticated)
         {
-            var members = userActivityService.GetUsersByActivityId(activityId).Result;
+            var approvedMembers = userActivityService.ApprovedUsers(activityId).Result;
             var user = userService.GetById(userId).Result;
-            if (!members.Contains(user)
-                && GetById(activityId).Result.Capacity > members.Count
-                && (isAuthenticated))
+            if (!isAuthenticated)
             {
-                return true;
+                return Models.canJoin.FALSE;
             }
-
-            return false;
+            if (approvedMembers.Contains(user))
+            {
+                return Models.canJoin.APPROVED;
+            }
+            if(userActivityService.isSubscribed(activityId, userId))
+            {
+                return Models.canJoin.PENDING;
+            }
+            if (GetById(activityId).Result.Capacity > approvedMembers.Count)
+            {
+                return Models.canJoin.TRUE;
+            }
+            
+            return Models.canJoin.FALSE;
         }
         
         public  bool canEdit(int activityId, string userId)

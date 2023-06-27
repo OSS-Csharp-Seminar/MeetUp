@@ -56,7 +56,7 @@ namespace MeetUp.Data
                 }
             }
         }
-        
+
         public static async Task SeedCities(IApplicationBuilder applicationBuilder)
         {
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
@@ -87,6 +87,28 @@ namespace MeetUp.Data
                 locationRepository.Add(new Category("Sport"));
                 locationRepository.Add(new Category("Games"));
                 locationRepository.Add(new Category("Music"));
+            }
+        }
+
+        public static async Task SeedMeetActivities(IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            {
+                var activityRepository = serviceScope.ServiceProvider.GetRequiredService<IMeetActivityRepository>();
+                var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+                
+                var titles = new string[]
+                    { "Nogomet 4v4", "Online gaming", "Ide li ko vani?", "CarShare Zagreb", "Tražimo bassista" };
+
+                var description =
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
+                for (int i = 0; i < 5; i++)
+                {
+                    var picture = File.ReadAllBytes("wwwroot/SeedImages/0" + (i+1) + ".jpg");
+                    activityRepository.Add(new MeetActivity(titles[i], description,
+                        DateTime.Now, 5, picture, 1 % 3, 1 % 3, userManager.FindByEmailAsync("user@user.com").Result.Id));
+                }
             }
         }
     }

@@ -64,6 +64,7 @@ if (args.Length == 1 && args[0].ToLower() == "seeddata")
     await Seed.SeedCities(app);
     await Seed.SeedLocations(app);
     await Seed.SeedCategories(app);
+    await Seed.SeedMeetActivities(app);
     //Seed.SeedData(app);
 }
 

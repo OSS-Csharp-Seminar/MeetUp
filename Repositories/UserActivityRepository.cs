@@ -35,9 +35,9 @@ namespace MeetUp.Repositories
             return await _context.UserActivity.Include(ua => ua.User).Include(ua=>ua.Activity).ToListAsync();
         }
 
-        public async Task<ICollection<AppUser>> GetUsersByActivityId(int activityId)
+        public async Task<ICollection<AppUser>> ApprovedUsers(int activityId)
         {
-            return await _context.UserActivity.Where(userActivity => userActivity.ActivityId == activityId)
+            return await _context.UserActivity.Where(userActivity => userActivity.ActivityId == activityId && userActivity.Approved == true)
                 .Select(userActivity => userActivity.User).ToListAsync();
         }
         
