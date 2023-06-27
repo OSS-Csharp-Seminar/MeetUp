@@ -2,6 +2,7 @@
 using MeetUp.Models;
 using MeetUp.ViewModels;
 
+
 namespace MeetUp.Services
 {
     public class MeetActivityService :IMeetActivityService
@@ -60,10 +61,11 @@ namespace MeetUp.Services
             return "";
         }
 
-        public bool canJoin(int activityId, string userId, bool isAuthenticated)
+        public  bool canJoin(int activityId, string userId, bool isAuthenticated)
         {
             var members = userActivityService.GetUsersByActivityId(activityId).Result;
-            if ((!members.Contains(userService.GetById(userId).Result))
+            var user = userService.GetById(userId).Result;
+            if (!members.Contains(user)
                 && GetById(activityId).Result.Capacity > members.Count
                 && (isAuthenticated))
             {

@@ -1,4 +1,5 @@
-﻿using MeetUp.Interfaces;
+﻿using MeetUp.Data;
+using MeetUp.Interfaces;
 using MeetUp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
@@ -15,9 +16,7 @@ namespace MeetUp.Controllers
             service = _service;
         }
 
-        // GET: Categories
-
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Index()
         {
             var categories = await service.GetAll();
@@ -26,8 +25,7 @@ namespace MeetUp.Controllers
                         Problem("Entity set 'MeetUpContext.Category'  is null.");
         }
 
-        // GET: Categories/Details/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Details(int id)
         {
 
@@ -41,8 +39,7 @@ namespace MeetUp.Controllers
             return View(category);
         }
 
-        // GET: Categories/Create
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public IActionResult Create()
         {
             return View();
@@ -50,7 +47,7 @@ namespace MeetUp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Create([Bind("Id,Name")] Category category)
         {
             if (ModelState.IsValid)
@@ -62,8 +59,7 @@ namespace MeetUp.Controllers
             return View(category);
         }
 
-        // GET: Categories/Edit/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -78,7 +74,7 @@ namespace MeetUp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Category category)
         {
 
@@ -91,14 +87,12 @@ namespace MeetUp.Controllers
                     return NotFound();
                 }
 
-
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
         }
 
-        // GET: Categories/Delete/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Delete(int id)
         {
   
@@ -113,19 +107,16 @@ namespace MeetUp.Controllers
             return View(category);
         }
 
-        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
             var category = service.GetById(id);
             if (category != null)
             {
                 service.Delete(category.Result);
             }
-
 
             return RedirectToAction(nameof(Index));
         }

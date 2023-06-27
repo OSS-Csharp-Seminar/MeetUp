@@ -7,6 +7,7 @@ using MeetUp.Services;
 using MeetUp.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MeetUpContext>(options =>
@@ -22,7 +23,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>()
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-
+builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
@@ -41,7 +42,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     // Cookie settings
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
 
     options.LoginPath = "/Identity/Account/Login";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
@@ -82,6 +83,6 @@ app.MapDefaultControllerRoute();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=MeetActivities}/{action=Index}/{id?}");
+    pattern: "{controller=MeetActivities}/{action=Index}");
 
 app.Run();

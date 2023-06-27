@@ -9,6 +9,7 @@ using MeetUp.Data;
 using MeetUp.Models;
 using MeetUp.Interfaces;
 using Microsoft.AspNet.Identity;
+using MeetUp.Services;
 
 namespace MeetUp.Controllers
 {
@@ -17,28 +18,28 @@ namespace MeetUp.Controllers
         private readonly IUserActivityService service;
         private readonly IUserService userService;
         private readonly IMeetActivityService meetActivityService;
+        private readonly IEmailService emailService;
 
-        public UserActivitiesController(IUserActivityService _service, IUserService _userService, IMeetActivityService _meetActivityService)
+        public UserActivitiesController(IUserActivityService _service, IUserService _userService, IMeetActivityService _meetActivityService, IEmailService _emailService)
         {
             service = _service;
             userService = _userService;
             meetActivityService = _meetActivityService;
+            emailService = _emailService;
         }
 
-        // GET: UserActivities
         public async Task<IActionResult> Index()
         {
             var userActivities = await service.GetAll();
             return View(userActivities);
         }
-        // GET: OwnedUserActivities
+
         public async Task<IActionResult> Owned()
         {
             var userActivities = await service.GetByActivityOwner(User.Identity.GetUserId());
-            return View(userActivities);
+            return View(Approve);
         }
 
-        // GET: UserActivities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -59,18 +60,22 @@ namespace MeetUp.Controllers
         public async Task<IActionResult> Approve(string userId, int activityId)
         {
             service.Approve(userId, activityId);
+
             return RedirectToAction(nameof(Owned));
         }
 
-        // POST: UserActivities/Create
         [HttpPost]
         public async Task<IActionResult> Create(int activityId)
         {
             service.Add(User.Identity.GetUserId(), activityId);
+            var activity = meetActivityService.GetById(activityId).Result;
+            EmailMessage message = new();
+            message.GenerateNotifyAcitivtyOwner(activity.Owner.Email, activity);
+            await emailService.SendEmailAsync(message);
+
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: UserActivities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,7 +114,6 @@ namespace MeetUp.Controllers
             return View(userActivity);
         }
 
-        // GET: UserActivities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,7 +130,6 @@ namespace MeetUp.Controllers
             return View(userActivity);
         }
 
-        // POST: UserActivities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

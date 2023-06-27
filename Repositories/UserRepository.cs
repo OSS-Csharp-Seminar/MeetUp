@@ -35,7 +35,7 @@ namespace MeetUp.Repositories
 
         public async Task<AppUser> GetById(string id)
         {
-            return await _context.User.FirstOrDefaultAsync();
+            return await _context.User.Where(u=>u.Id == id).FirstOrDefaultAsync();
         }
 
         public bool Delete(AppUser user)

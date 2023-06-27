@@ -23,14 +23,12 @@ namespace MeetUp.Controllers
             userService = _userService;
         }
 
-        // GET: Ratings
         public async Task<IActionResult> Index()
         {
             var ratings = await service.GetAll();
             return View(ratings);
         }
 
-        // GET: Ratings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,38 +45,34 @@ namespace MeetUp.Controllers
             return View(rating);
         }
 
-        // GET: Ratings/Create
         public IActionResult Create()
         {
             ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName");
             return View();
         }
 
-        // POST: Ratings/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Score,Message,RevieweeId")] Rating rating)
         {
             if (ModelState.IsValid)
             {
-                service.Add(rating);
+                var result = service.Add(rating);
                 return RedirectToAction(nameof(Index));
             }
             ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName", rating.RevieweeId);
             return View(rating);
         }
 
-        // GET: Ratings/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var rating = await service.GetById(id.Value);
+            var rating = await service.GetById(id);
             if (rating == null)
             {
                 return NotFound();
@@ -106,16 +100,16 @@ namespace MeetUp.Controllers
             return View(rating);
         }
 
-        // GET: Ratings/Delete/5
+        [HttpGet]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null )
             {
                 return NotFound();
             }
 
-            var rating = service.GetById(id.Value);
+            var rating = await service.GetById(id);
             if (rating == null)
             {
                 return NotFound();
@@ -124,22 +118,17 @@ namespace MeetUp.Controllers
             return View(rating);
         }
 
-        // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
             var rating = await service.GetById(id);
             if (rating != null)
             {
                 service.Delete(rating);
-            }
-   
+            }  
             return RedirectToAction(nameof(Index));
         }
-
-   
     }
 }
