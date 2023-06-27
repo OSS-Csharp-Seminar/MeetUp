@@ -27,12 +27,12 @@ namespace MeetUp.Repositories
 
         public async Task<ICollection<Location>> GetAll()
         {
-            return await _context.Location.ToListAsync();
+            return await _context.Location.Include(l => l.City).ToListAsync();
         }
 
         public async Task<Location> GetById(int id)
         {
-            return await _context.Location.FirstOrDefaultAsync();
+            return await _context.Location.Include(l => l.City).FirstOrDefaultAsync();
         }
 
         public bool Save()
