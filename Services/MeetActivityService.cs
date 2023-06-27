@@ -1,6 +1,7 @@
 ﻿using MeetUp.Interfaces;
 using MeetUp.Models;
 using MeetUp.ViewModels;
+using Org.BouncyCastle.Asn1.Cms;
 
 
 namespace MeetUp.Services
@@ -48,14 +49,16 @@ namespace MeetUp.Services
             return repo.GetById(id);
         }
 
-        public bool Update(Models.MeetActivity meetActivity)
+        public bool Update(MeetActivityEditModel meetActivity)
         {
-            return repo.Update(meetActivity);   
+            //TODO: Doesn't have to create each time
+            var location = locationService.Add(new Location(meetActivity.Address, meetActivity.CityId));
+            return repo.Update(MeetActivityEditModel.To(meetActivity, location.Id));   
         }
 
-        public String Validate(MeetActivityCreateModel meetActivity)
+        public String ValidateDate(DateTime activityTime)
         {
-            if (meetActivity.Time <= DateTime.Now)
+            if (activityTime <= DateTime.Now)
             {
                 return "Date cannot be in the past.";
             }
@@ -70,6 +73,18 @@ namespace MeetUp.Services
             if (!members.Contains(user)
                 && GetById(activityId).Result.Capacity > members.Count
                 && (isAuthenticated))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
+        public  bool canEdit(int activityId, string userId)
+        {
+            var user = userService.GetById(userId).Result;
+            var activity = GetById(activityId).Result;
+            if (user == activity.Owner)
             {
                 return true;
             }

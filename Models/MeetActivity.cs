@@ -34,6 +34,19 @@ namespace MeetUp.Models
             CategoryId = categoryId;
             AppUserId = appUserId;
         }
+        
+        public MeetActivity(int id, string name, string description, DateTime time, int capacity, byte[]? picture, int locationId, int categoryId, string appUserId)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            Time = time;
+            Capacity = capacity;
+            Picture = picture;
+            LocationId = locationId;
+            CategoryId = categoryId;
+            AppUserId = appUserId;
+        }
         public MeetActivity()
         {
             
