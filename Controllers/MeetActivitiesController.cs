@@ -1,9 +1,14 @@
-﻿using MeetUp.Interfaces;
+﻿using MeetUp.Data;
+using MeetUp.Interfaces;
 using MeetUp.Models;
 using MeetUp.ViewModels;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using NuGet.Configuration;
+using System.Data;
 
 namespace MeetUp.Controllers
 {
@@ -22,13 +27,10 @@ namespace MeetUp.Controllers
             userActivityService = _userActivityService;
         }
 
-        // GET: MeetActivities
         public async Task<IActionResult> Index()
         {
             return View(await service.GetAll());
         }
-
-        // GET: MeetActivities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,23 +42,23 @@ namespace MeetUp.Controllers
             var meetActivity = service.GetById(id.Value).Result;
             var meetActivityViewModel = new MeetActivityViewModel();
             meetActivityViewModel.meetActivity = meetActivity;
-            meetActivityViewModel.members=userActivityService.GetUsersByActivityId(meetActivity.Id).Result;
+            meetActivityViewModel.members = userActivityService.GetUsersByActivityId(meetActivity.Id).Result;
             meetActivityViewModel.canJoin = service.canJoin(meetActivity.Id, User.Identity.GetUserId(), User.Identity.IsAuthenticated);
-                
+
             if (meetActivity == null)
             {
                 return NotFound();
             }
             return View(meetActivityViewModel);
         }
-
+        [Authorize]
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(categoryService.GetAll().Result, "Id", "Name");
             ViewData["LocationId"] = new SelectList(locationService.GetAll().Result, "Id", "Id");
             return View();
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create(MeetActivityCreateModel meetActivity)
         {
@@ -71,8 +73,7 @@ namespace MeetUp.Controllers
             ViewData["Errors"] = errors;
             return View(meetActivity);
         }
-
-        // GET: MeetActivities/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,10 +91,8 @@ namespace MeetUp.Controllers
             return View(meetActivity);
         }
 
-        // POST: MeetActivities/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Time,Capacity,Picture,LocationId,CategoryId")] MeetActivity meetActivity)
         {
@@ -113,7 +112,7 @@ namespace MeetUp.Controllers
             return View(meetActivity);
         }
 
-        // GET: MeetActivities/Delete/5
+        // [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,8 +128,7 @@ namespace MeetUp.Controllers
 
             return View(meetActivity);
         }
-
-        // POST: MeetActivities/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
