@@ -25,20 +25,18 @@ namespace MeetUp.Controllers
             meetActivityService = _meetActivityService;
         }
 
-        // GET: UserActivities
         public async Task<IActionResult> Index()
         {
             var userActivities = await service.GetAll();
             return View(userActivities);
         }
-        // GET: OwnedUserActivities
+
         public async Task<IActionResult> Owned()
         {
             var userActivities = await service.GetByActivityOwner(User.Identity.GetUserId());
             return View(userActivities);
         }
 
-        // GET: UserActivities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -62,7 +60,6 @@ namespace MeetUp.Controllers
             return RedirectToAction(nameof(Owned));
         }
 
-        // POST: UserActivities/Create
         [HttpPost]
         public async Task<IActionResult> Create(int activityId)
         {
@@ -70,7 +67,6 @@ namespace MeetUp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: UserActivities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,7 +105,6 @@ namespace MeetUp.Controllers
             return View(userActivity);
         }
 
-        // GET: UserActivities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,7 +121,6 @@ namespace MeetUp.Controllers
             return View(userActivity);
         }
 
-        // POST: UserActivities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

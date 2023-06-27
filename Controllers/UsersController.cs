@@ -1,4 +1,5 @@
-﻿using MeetUp.Interfaces;
+﻿using MeetUp.Data;
+using MeetUp.Interfaces;
 using MeetUp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +41,7 @@ namespace MeetUp.Controllers
 
             return View(result);
         }
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         // GET: Users/Create
         public IActionResult Create()
         {
@@ -49,7 +50,7 @@ namespace MeetUp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Create([Bind("Id,FullName,Email,Password")] AppUser user)
         { 
             if (ModelState.IsValid)
@@ -60,7 +61,7 @@ namespace MeetUp.Controllers
             }
             return View(user);
         }
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Edit(string? id)
         {
             if (id == null)
@@ -78,7 +79,7 @@ namespace MeetUp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,Email,Password,Image")] AppUser user)
         {
 
@@ -93,7 +94,7 @@ namespace MeetUp.Controllers
         }
 
         // GET: Users/Delete/5
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> Delete(string? id)
         {
             if (id == null)
@@ -113,7 +114,7 @@ namespace MeetUp.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = UserRoles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var user = await service.GetById(id);

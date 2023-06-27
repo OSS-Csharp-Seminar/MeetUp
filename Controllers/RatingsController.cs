@@ -23,14 +23,12 @@ namespace MeetUp.Controllers
             userService = _userService;
         }
 
-        // GET: Ratings
         public async Task<IActionResult> Index()
         {
             var ratings = await service.GetAll();
             return View(ratings);
         }
 
-        // GET: Ratings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -47,16 +45,12 @@ namespace MeetUp.Controllers
             return View(rating);
         }
 
-        // GET: Ratings/Create
         public IActionResult Create()
         {
             ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName");
             return View();
         }
 
-        // POST: Ratings/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Score,Message,RevieweeId")] Rating rating)
@@ -70,7 +64,6 @@ namespace MeetUp.Controllers
             return View(rating);
         }
 
-        // GET: Ratings/Edit/5
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -107,7 +100,6 @@ namespace MeetUp.Controllers
             return View(rating);
         }
 
-        // GET: Ratings/Delete/5
         [HttpGet]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int id)
@@ -126,22 +118,17 @@ namespace MeetUp.Controllers
             return View(rating);
         }
 
-        // POST: Ratings/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
             var rating = await service.GetById(id);
             if (rating != null)
             {
                 service.Delete(rating);
-            }
-   
+            }  
             return RedirectToAction(nameof(Index));
         }
-
-   
     }
 }
