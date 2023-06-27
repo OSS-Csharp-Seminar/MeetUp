@@ -26,5 +26,7 @@ namespace MeetUp.Data
         public DbSet<MeetUp.Models.MeetActivity>? MeetActivity { get; set; }
 
         public DbSet<MeetUp.Models.UserActivity>? UserActivity { get; set; }
+
+        public DbSet<City> City { get; set; }
     }
 }
