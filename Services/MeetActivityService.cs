@@ -6,7 +6,7 @@ using Org.BouncyCastle.Asn1.Cms;
 
 namespace MeetUp.Services
 {
-    public class MeetActivityService :IMeetActivityService
+    public class MeetActivityService : IMeetActivityService
     {
         private readonly IMeetActivityRepository repo;
         private readonly IUserActivityService userActivityService;
@@ -103,8 +103,11 @@ namespace MeetUp.Services
             {
                 return true;
             }
+            }
 
-            return false;
+        public async Task<ICollection<MeetActivity>> GetAllByCityName(string searchString)
+        {
+            return await repo.GetAllByCityName(searchString);
         }
     }
 }

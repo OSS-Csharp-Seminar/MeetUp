@@ -23,8 +23,12 @@ namespace MeetUp.Controllers
             userActivityService = _userActivityService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+               return View(await service.GetAllByCityName(searchString));
+            }
             return View(await service.GetAll());
         }
         public async Task<IActionResult> Details(int? id)

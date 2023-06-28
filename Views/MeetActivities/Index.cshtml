@@ -4,13 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Activities</h1>
+<h1 class="text-primary">Activities</h1>
 
 <div class="container">
     <p>
-        <a asp-action="Create">Create New</a>
+        <button class="btn btn-primary" asp-action="Create">Create New</button>
     </p>
-<div class="row">
+
+    @using (Html.BeginForm())
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+    }
+    <div class="row">
     @foreach (var item in Model) {
             <div class="col-3 mb-3">
                 <div class="card" style="width: 18rem;">
@@ -30,5 +38,5 @@
                 </div>
                 </div>
         }
-</div>
+    </div>
 </div>
