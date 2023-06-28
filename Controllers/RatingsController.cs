@@ -78,10 +78,11 @@ namespace MeetUp.Controllers
                 };
                
                 var result = service.Add(rating);
-                return RedirectToAction("Users", "Details", new { id = ViewData["userId"] });
+                return RedirectToAction("Details", "Users", new { id = newRating.Id });
             }
             
-            return RedirectToAction("Users", "Details",new{id= ViewData["userId"] });
+            return RedirectToAction("Details", "Users" 
+                ,new { id= newRating.Id });
         }
 
         [HttpPost]
