@@ -94,19 +94,14 @@ namespace MeetUp.Services
             
             return Models.canJoin.FALSE;
         }
-        
-        public  bool canEdit(int activityId, string userId)
+
+        public bool canEdit(int activityId, string userId)
         {
             var user = userService.GetById(userId).Result;
             var activity = GetById(activityId).Result;
-            if (user == activity.Owner)
-            {
-                return true;
-            }
+            return (user == activity.Owner);
 
-            return false;
         }
-
         public async Task<ICollection<MeetActivity>> GetAllByCityName(string searchString)
         {
             return await repo.GetAllByCityName(searchString);

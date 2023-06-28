@@ -1,4 +1,5 @@
-﻿@model MeetUp.ViewModels.UserDetailsViewModel
+﻿@using Microsoft.AspNet.Identity;
+@model MeetUp.ViewModels.UserDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -6,7 +7,7 @@
 
 <div>
     <h4>@Html.DisplayFor(model => model.User.Email)</h4>
-    @if (Model.AverageScore == double.NaN)
+    @if (Model.AverageScore == double.NaN || Model.AverageScore == 0)
     {
         <p>No reviews</p>
     }
@@ -15,9 +16,13 @@
         <p>
            Average rating: @Html.DisplayFor(model=> model.AverageScore)
         </p>
-       
     }
-
+    @if (User.Identity.IsAuthenticated && User.Identity.GetUserId() != Model.User.Id)
+    {
+        <a class="btn btn-primary" asp-controller="Ratings"
+                       asp-action="AddRating"
+                       asp-route-id="@Model.User.Id">Add review</a>
+    }
     <hr />
 
 </div>
@@ -31,8 +36,8 @@
             
             @foreach (var item in Model.Ratings)
             {
-                <div class="w-50 mb-1 p-1 border outline">
-                  Score:  @Html.DisplayFor(modelItem => item.Score) <br>
+                <div class="w-50 mb-1 p-2 border border-2 border-primary">
+                    Score:  @Html.DisplayFor(modelItem => item.Score)  <br>
                     @Html.DisplayFor(modelItem => item.Message)
                 </div>
                
@@ -50,16 +55,14 @@
         {
             @foreach (var item in Model.UserActivities)
             {
-                <tr>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Activity.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Activity.Time)
-                    </td>
-
-                </tr>
+                <div class="w-50 mb-1 p-2 border border-1 border-primary rounded">
+                    <a asp-controller="MeetActivities"
+                       asp-action="Details"
+                       asp-route-id="@item.Activity.Id">
+                        @Html.DisplayFor(modelItem => item.Activity.Name)</a> <br>
+                    @Html.DisplayFor(modelItem => item.Activity.Time)
+                </div>
             }
         }
         else

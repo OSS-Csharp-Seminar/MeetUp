@@ -13,7 +13,6 @@ namespace MeetUp.Interfaces
         String ValidateDate(DateTime activityTime);
         canJoin canJoin(int activityId, string userId, bool isAuthenticated);
         bool canEdit(int activityId, string userId);
-
         Task<ICollection<MeetActivity>> GetAllByCityName(string searchString);
     }
 }
