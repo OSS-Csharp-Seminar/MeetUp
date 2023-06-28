@@ -9,6 +9,7 @@ using MeetUp.Data;
 using MeetUp.Models;
 using MeetUp.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using MeetUp.ViewModels;
 
 namespace MeetUp.Controllers
 {
@@ -19,7 +20,7 @@ namespace MeetUp.Controllers
 
         public RatingsController(IRatingService _service, IUserService _userService)
         {
-            service =_service;
+            service = _service;
             userService = _userService;
         }
 
@@ -50,8 +51,41 @@ namespace MeetUp.Controllers
             ViewData["RevieweeId"] = new SelectList(userService.GetAll().Result, "Id", "UserName");
             return View();
         }
+        [HttpGet]
+        public IActionResult AddRating(string id)
+        {
+         
+            AddRatingViewModel rating = new AddRatingViewModel
+            {
+                Id = id,
+            };
+           
+            return View(rating);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddRatingPost([Bind("Score,Message,Id")] AddRatingViewModel newRating)
+        {
+         
+            if (ModelState.IsValid)
+            {
+                var rating = new Rating
+                {
+                    Score = newRating.Score.Value,
+                    Message = newRating.Message,
+                    RevieweeId = newRating.Id
+
+                };
+               
+                var result = service.Add(rating);
+                return RedirectToAction("Users", "Details", new { id = ViewData["userId"] });
+            }
+            
+            return RedirectToAction("Users", "Details",new{id= ViewData["userId"] });
+        }
 
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Score,Message,RevieweeId")] Rating rating)
         {

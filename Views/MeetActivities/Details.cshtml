@@ -24,9 +24,10 @@
                 @if(@Model.members.Count > 0){
                     @foreach (var item in @Model.members)
                 {
-                    <p>
-                        @item.UserName
-                    </p>
+                            <a asp-controller="Users"
+                               asp-action="Details"
+                               asp-route-id="@item.Id">@item.UserName</a>
+                               <br />
                 }
                 }else
                     {
@@ -45,7 +46,7 @@
                     }else if(@Model.canJoin == canJoin.PENDING){
                         <p>Waiting for approval.</p>
             }else if(@Model.canJoin == canJoin.APPROVED){
-                                     <p>You are approved.</p>
+                                     <p class="pt-3">You are approved.</p>
                          }
             
             <div>
