@@ -10,7 +10,7 @@ namespace MeetUp.Interfaces
         bool isSubscribed(int activityId, string userId);
         Task<ICollection<UserActivity>> GetByActivityOwner(string userId);
         void Approve(string userId, int activityId);
-        bool Add(string userId, int activityId);
+        bool Add(UserActivity userActivity);
         bool Update(UserActivity userActivity);
         bool Delete(UserActivity userActivity);
     }

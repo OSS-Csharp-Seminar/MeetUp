@@ -61,7 +61,7 @@ namespace MeetUp.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(int activityId)
         {
-            service.Add(User.Identity.GetUserId(), activityId);
+            service.Add(new UserActivity(User.Identity.GetUserId(), activityId));
             var activity = meetActivityService.GetById(activityId).Result;
             EmailMessage message = new();
             message.GenerateNotifyAcitivtyOwner(activity.Owner.Email, activity);
