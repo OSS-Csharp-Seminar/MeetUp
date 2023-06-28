@@ -107,7 +107,7 @@ namespace MeetUp.Data
                 {
                     var picture = File.ReadAllBytes("wwwroot/SeedImages/0" + (i+1) + ".jpg");
                     activityRepository.Add(new MeetActivity(titles[i], description,
-                        DateTime.Now, 5, picture, 1 % 3, 1 % 3, userManager.FindByEmailAsync("user@user.com").Result.Id));
+                        DateTime.Now, 5, picture, (i%3)+1, (i%3)+1, userManager.FindByEmailAsync("user@user.com").Result.Id));
                 }
             }
         }
