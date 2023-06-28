@@ -30,6 +30,15 @@ namespace MeetUp.Repositories
             return await _context.MeetActivity.Include(ma => ma.Category).Include(ma => ma.Location).ToListAsync();
         }
 
+        public async Task<ICollection<MeetActivity>> GetAllByCityName(string searchString)
+        {
+            return await _context.MeetActivity
+                .Include(ma => ma.Category)
+                .Include(ma => ma.Location)
+                .ThenInclude(l => l.City)
+                .Where(ma => ma.Location.City.Name.Contains(searchString)).ToListAsync();
+        }
+
         public async Task<MeetActivity> GetById(int id)
         {
             return await _context.MeetActivity
