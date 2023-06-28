@@ -28,7 +28,7 @@ namespace MeetUp.Services
             var created = repo.Add(MeetActivityCreateModel.To(meetActivity, location.Id));
             if (created != null)
             {
-                userActivityService.Add(userId, created.Id);
+                userActivityService.Add(new UserActivity(userId, meetActivity.Id, true));
                 return true;
             }
             return false;
@@ -103,7 +103,9 @@ namespace MeetUp.Services
             {
                 return true;
             }
-            }
+
+            return false;
+        }
 
         public async Task<ICollection<MeetActivity>> GetAllByCityName(string searchString)
         {
