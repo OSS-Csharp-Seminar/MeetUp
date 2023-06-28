@@ -7,8 +7,10 @@
 <h1 class="text-primary">Activities</h1>
 
 <div class="container">
-    
-        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    @if(User.Identity.IsAuthenticated){
+        <a class="btn btn-primary mb-2" asp-action="Create">Create New</a>
+
+    }
    
     @using (Html.BeginForm())
     {
